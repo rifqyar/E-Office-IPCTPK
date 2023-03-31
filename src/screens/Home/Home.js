@@ -6,10 +6,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
 
-const CardMenuButton = ({ title, bgColor, imgSrc, navigation }) => {
+const CardMenuButton = ({ title, bgColor, imgSrc, navigation, route }) => {
   // const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.INBOX)}>
+    <TouchableOpacity onPress={() => navigation.navigate(route)}>
       <View style={{ alignItems: 'center', marginHorizontal: '5%' }}>
         <View style={{ backgroundColor: bgColor, height: 55, width: 55, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
           <Image source={imgSrc} style={{ height: 40, width: 40 }} />
@@ -68,7 +68,7 @@ const Home = ({navigation}) => {
             <Card style={{ marginTop: 20, marginHorizontal: '2.5%', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                 <CardMenuButton
-                  title={'Surat Masuk'} bgColor={'#FF4D00'} navigation={navigation}
+                  title={'Surat Masuk'} bgColor={'#FF4D00'} navigation={navigation} route={MainRouteName.INBOX}
                   imgSrc={require('../../assets/imgs/menu-icon/inbox-white.png')}
                 />
                 <CardMenuButton
