@@ -7,6 +7,8 @@ import { ArrowLeft2 } from 'iconsax-react-native';
 import { MainRouteName } from '../constants/mainRouteName';
 
 import Home from '../screens/Home/Home';
+import Inbox from '../screens/Inbox/Inbox'
+import Login from '../screens/Auth/Login';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
@@ -30,6 +32,19 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                     name={MainRouteName.HOME}
                     component={Home}
                     options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.INBOX}
+                    component={Inbox}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Surat Masuk",
+                        headerLeft: () => (
+                          <>
+                            <ArrowBackButton />
+                          </>
+                        )
+                      }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

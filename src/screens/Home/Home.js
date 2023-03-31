@@ -3,15 +3,20 @@ import { View, ScrollView, Image, ImageBackground, TouchableOpacity } from 'reac
 import { Text, Card } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { MainRouteName } from '../../constants/mainRouteName';
 
-const CardMenuButton = ({ title, bgColor, imgSrc }) => {
+const CardMenuButton = ({ title, bgColor, imgSrc, navigation }) => {
+  // const navigation = useNavigation();
   return (
-    <View style={{ alignItems: 'center', marginHorizontal: '5%' }}>
-      <View style={{ backgroundColor: bgColor, height: 55, width: 55, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-        <Image source={imgSrc} style={{ height: 40, width: 40 }} />
+    <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.INBOX)}>
+      <View style={{ alignItems: 'center', marginHorizontal: '5%' }}>
+        <View style={{ backgroundColor: bgColor, height: 55, width: 55, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+          <Image source={imgSrc} style={{ height: 40, width: 40 }} />
+        </View>
+        <Text>{title}</Text>
       </View>
-      <Text>{title}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -26,7 +31,7 @@ const SmallMenuButton = ({ title, imgSrc }) => {
   )
 }
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View>
       <View style={{ flexDirection: 'row', backgroundColor: '#006ba2' }}>
@@ -63,7 +68,7 @@ const Home = () => {
             <Card style={{ marginTop: 20, marginHorizontal: '2.5%', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                 <CardMenuButton
-                  title={'Surat Masuk'} bgColor={'#FF4D00'}
+                  title={'Surat Masuk'} bgColor={'#FF4D00'} navigation={navigation}
                   imgSrc={require('../../assets/imgs/menu-icon/inbox-white.png')}
                 />
                 <CardMenuButton

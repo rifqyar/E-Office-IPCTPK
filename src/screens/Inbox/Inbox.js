@@ -6,12 +6,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
 
-const Login = ({navigation}) => {
+const Inbox = ({navigation}) => {
   return (
     <View>
-      <Text>Login</Text>
+      <Text>inbox</Text>
     </View>
   )
 }
 
-export default Login
+export default Inbox

@@ -1,4 +1,5 @@
 export const MainRouteName = {
     LOGIN: 'Login',
-    HOME: 'Beranda',
+    HOME: 'Home',
+    INBOX: 'Inbox'
   };
