@@ -27,6 +27,7 @@ import {
 
 import NavigationProvider from './src/navigations/NavigationProvider';
 import Home from './src/screens/Home/Home';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -34,29 +35,11 @@ type SectionProps = PropsWithChildren<{
 
 
 function App(): JSX.Element {
-
   return (
-    <NavigationProvider />
+    <PaperProvider>
+      <NavigationProvider />
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

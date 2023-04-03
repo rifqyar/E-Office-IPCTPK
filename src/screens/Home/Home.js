@@ -1,10 +1,12 @@
-import React from 'react'
-import { View, ScrollView, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, Card } from 'react-native-paper';
+import React, { useEffect } from 'react'
+import { View, ScrollView, Image, ImageBackground, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import { Text, Card, Caption } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
+import LinearGradient from 'react-native-linear-gradient';
+import { COLORS } from '../../constants/theme';
 
 const CardMenuButton = ({ title, bgColor, imgSrc, navigation, route }) => {
   // const navigation = useNavigation();
@@ -32,8 +34,17 @@ const SmallMenuButton = ({ title, imgSrc }) => {
 }
 
 const Home = ({navigation}) => {
+  useEffect(() => {
+    StatusBar.setTranslucent(false)
+    StatusBar.setBackgroundColor('#006ba2'); 
+    StatusBar.setBarStyle('light-content')
+
+    return () => {
+    }
+  })
+  
   return (
-    <View>
+    <SafeAreaView>
       <View style={ styles.header }>
         <View style={{ flexDirection: 'row', width: '50%', marginVertical: 10 }}>
           <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
@@ -58,7 +69,8 @@ const Home = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ backgroundColor: 'white' }}>
           <ImageBackground source={require('../../assets/imgs/header-bg-2.png')}>
             <View style={{ marginLeft: '2.5%' }}>
@@ -131,24 +143,34 @@ const Home = ({navigation}) => {
         {/* Agenda */}
         <View style={{ backgroundColor: 'white', marginTop: 10 }}>
           <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>Agenda</Text>
-          <Text style={{ marginLeft: '2.5%', color: 'grey', marginTop: 5 }}>Daftar agenda anda hari ini</Text>
-          <Card style={{ marginHorizontal: '2.5%', backgroundColor: '#0fc7fa', marginTop: 10, marginBottom: 15 }}>
+          <Caption style={{ marginLeft: '2.5%', color: 'grey', marginTop: 2 }}>Daftar agenda anda hari ini</Caption>
+          <LinearGradient 
+            start={{x: 0, y: 0}} end={{x: 1, y: 0}}  
+            style={{marginHorizontal: '2.5%', marginTop: 10, marginBottom: 15, borderRadius: 15}} 
+            colors={[COLORS.lightPurple, COLORS.lightCyan]}
+          >
             <Text style={{ marginLeft: '2.5%', color: 'white', marginVertical: 15 }}>Tidak ada agenda hari ini</Text>
-          </Card>
+          </LinearGradient>
+          {/* <Card style={{ marginHorizontal: '2.5%', backgroundColor: '#0fc7fa', marginTop: 10, marginBottom: 15 }}>
+          </Card> */}
         </View>
 
         {/* P2B */}
         <View style={{ backgroundColor: 'white', marginTop: 10, marginBottom: 60 }}>
           <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>P2B</Text>
-          <Text style={{ marginLeft: '2.5%', color: 'grey', marginTop: 5 }}>Penilaian Performa Bulanan</Text>
-          <Card style={{ marginHorizontal: '2.5%', backgroundColor: '#fc6b03', marginTop: 10, marginBottom: 15 }}>
+          <Caption style={{ marginLeft: '2.5%', color: 'grey', marginTop: 2 }}>Penilaian Performa Bulanan</Caption>
+          <LinearGradient 
+            start={{x: 0, y: 0}} end={{x: 1, y: 0}}  
+            style={{marginHorizontal: '2.5%', marginTop: 10, marginBottom: 15, borderRadius: 15}} 
+            colors={[COLORS.lightPink, COLORS.lightOrange]}
+          >
             <View style={{flexDirection: 'row'}}>
               <View style={{ maxWidth: '70%', marginTop: 10 }}>
                 <View style={{marginLeft: '5%', flexDirection: 'row'}}>
                   <Image source={require('../../assets/imgs/menu-icon/p2b-white.png')} style={{ height: 35, width: 35 }} />
                   <Text style={{color: 'white', marginLeft: 10, marginTop: 10}}>P2B</Text>
                 </View>
-                <Text style={{ marginLeft: '2.5%', color: 'white', marginVertical: 15 }}>Karyawan dapat menambah, mengubah, submit serta melakukan approval P2B.</Text>
+                <Text style={{ marginLeft: '5%', color: 'white', marginVertical: 15 }}>Karyawan dapat menambah, mengubah, submit serta melakukan approval P2B.</Text>
               </View>
               <View style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '7.5%' }}>
                 <TouchableOpacity style={{ height: 25, width: 50, borderRadius: 100, alignItems: 'center', justifyContent: 'center', borderWidth: 0.5, borderColor: 'white'}}>
@@ -156,10 +178,10 @@ const Home = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </Card>
+          </LinearGradient>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }
 

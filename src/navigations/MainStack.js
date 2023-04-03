@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +9,7 @@ import { MainRouteName } from '../constants/mainRouteName';
 import Home from '../screens/Home/Home';
 import Inbox from '../screens/Inbox/Inbox'
 import Login from '../screens/Auth/Login';
+import { Alert, BackHandler } from 'react-native';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
@@ -39,8 +40,41 @@ const SearchButton = () => {
 };
 
 const MainStack = ({ isLoggedIn, navigation }) => {
+    const navigationRef = useRef();
+    const routeNameRef = useRef();
+
+    const backAction = () => {
+        if (routeNameRef.current == 'Home'){
+            Alert.alert("Hold on!", "Are you sure you want to exit app?", [
+                {
+                text: "Cancel",
+                onPress: () => {
+                    return true;
+                },
+                style: "cancel"
+                },
+                { text: "YES", onPress: () => BackHandler.exitApp() }
+            ]);
+            return true;
+        }
+    }
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", backAction);
+      return () => {
+        BackHandler.removeEventListener("hardwareBackPress", backAction);
+      }
+    }, [])
+    
     return (
-        <NavigationContainer>
+        <NavigationContainer
+            ref={navigationRef}
+            onReady={() => (routeNameRef.current = navigationRef.current.getCurrentRoute().name)}
+            onStateChange={async () => {
+                const currentRouteName = navigationRef.current.getCurrentRoute().name;
+                routeNameRef.current = currentRouteName;
+            }}
+        >
             <Stack.Navigator>
                 {/* Login */}
                 <Stack.Screen
@@ -72,7 +106,7 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                             <>
                                 <SearchButton />
                             </>
-                        )
+                        ),
                     }}
                 />
             </Stack.Navigator>
