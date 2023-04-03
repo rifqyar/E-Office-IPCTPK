@@ -42,9 +42,15 @@ const MainStack = ({ isLoggedIn, navigation }) => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                {/* Login */}
                 <Stack.Screen
                     name={MainRouteName.HOME}
                     component={Home}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.LOGIN}
+                    component={Login}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

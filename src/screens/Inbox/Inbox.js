@@ -30,7 +30,7 @@ const Inbox = ({ navigation }) => {
               <Text style={{color: '#0394fc'}}>01-FEB-23</Text>
             </View>
             <View style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
-              <Text style={{fontSize: 12}}>KEMBALIKAN</Text>
+              <Text style={{fontSize: 12, color: '#0394fc'}}>KEMBALIKAN</Text>
             </View>
           </View>
         </TouchableOpacity>

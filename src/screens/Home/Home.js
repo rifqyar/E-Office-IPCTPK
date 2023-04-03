@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, Card } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -34,7 +34,7 @@ const SmallMenuButton = ({ title, imgSrc }) => {
 const Home = ({navigation}) => {
   return (
     <View>
-      <View style={{ flexDirection: 'row', backgroundColor: '#006ba2' }}>
+      <View style={ styles.header }>
         <View style={{ flexDirection: 'row', width: '50%', marginVertical: 10 }}>
           <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
           <Text style={{ color: 'white', marginTop: 7.5, marginLeft: 7.5, fontSize: 20 }}>E-Office</Text>
@@ -164,3 +164,10 @@ const Home = ({navigation}) => {
 }
 
 export default Home
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row', 
+    backgroundColor: '#006ba2'
+  }
+})
