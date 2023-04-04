@@ -51,7 +51,7 @@ const Home = ({navigation}) => {
           <Text style={{ color: 'white', marginTop: 7.5, marginLeft: 7.5, fontSize: 20 }}>E-Office</Text>
         </View>
         <View style={{ flexDirection: 'row-reverse', width: '50%', marginTop: 17.5 }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.LOGIN)}>
             <AntDesign
               name="logout"
               color="rgba(255, 255, 255, .9)"
@@ -84,7 +84,7 @@ const Home = ({navigation}) => {
                   imgSrc={require('../../assets/imgs/menu-icon/inbox-white.png')}
                 />
                 <CardMenuButton
-                  title={'Surat Keluar'} bgColor={'#fcce03'}
+                  title={'Surat Keluar'} bgColor={'#fcce03'} navigation={navigation} route={MainRouteName.OUTBOX}
                   imgSrc={require('../../assets/imgs/menu-icon/outbox-white.png')}
                 />
                 <CardMenuButton

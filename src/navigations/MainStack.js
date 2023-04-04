@@ -7,7 +7,8 @@ import { ArrowLeft2, SearchNormal1 } from 'iconsax-react-native';
 import { MainRouteName } from '../constants/mainRouteName';
 
 import Home from '../screens/Home/Home';
-import Inbox from '../screens/Inbox/Inbox'
+import Inbox from '../screens/Inbox/Inbox';
+import Outbox from '../screens/Mail/Outbox/Outbox';
 import Login from '../screens/Auth/Login';
 import { Alert, BackHandler } from 'react-native';
 
@@ -78,13 +79,13 @@ const MainStack = ({ isLoggedIn, navigation }) => {
             <Stack.Navigator>
                 {/* Login */}
                 <Stack.Screen
-                    name={MainRouteName.HOME}
-                    component={Home}
+                    name={MainRouteName.LOGIN}
+                    component={Login}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name={MainRouteName.LOGIN}
-                    component={Login}
+                    name={MainRouteName.HOME}
+                    component={Home}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
@@ -107,6 +108,28 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                                 <SearchButton />
                             </>
                         ),
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.OUTBOX}
+                    component={Outbox}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Surat Keluar",
+                        headerStyle: {
+                            backgroundColor: '#006ba2',
+                        },
+                        headerTintColor: '#fff',
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                        headerRight: () => (
+                            <>
+                                <SearchButton />
+                            </>
+                        )
                     }}
                 />
             </Stack.Navigator>
