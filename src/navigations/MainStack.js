@@ -45,7 +45,7 @@ const MainStack = ({ isLoggedIn, navigation }) => {
     const routeNameRef = useRef();
 
     const backAction = () => {
-        if (routeNameRef.current == 'Home'){
+        if (routeNameRef.current == 'Home' || routeNameRef.current == 'Login'){
             Alert.alert("Hold on!", "Are you sure you want to exit app?", [
                 {
                 text: "Cancel",

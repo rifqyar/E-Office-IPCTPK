@@ -1,4 +1,11 @@
 {
   "name": "EOfficeTPK",
-  "displayName": "EOfficeTPK"
+  "displayName": "EOfficeTPK",
+  "api_user": "EDI-USERNAME",
+  "api_pass": "RURJLVBBU1NXT1JE",
+  "api_base_url": "http://eoffice.ipctpk.co.id/api_itpk/index.php?wsdl",
+  "api_res" : "http://eoffice.ipctpk.co.id/api_itpk/",
+  "url_image" : "http://eoffice.ipctpk.co.id/api_itpk/foto_absen",
+  "api_p2b_url" : "http://103.19.80.188/api/index.php?wsdl",
+  "api_base_url_hadirkoe" : "http://103.19.80.188/api/index.php?wsdl"
 }
