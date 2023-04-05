@@ -8,7 +8,7 @@ import { MainRouteName } from '../constants/mainRouteName';
 
 import Home from '../screens/Home/Home';
 import Inbox from '../screens/Inbox/Inbox';
-import Outbox from '../screens/Mail/Outbox/Outbox';
+import Outbox from '../screens/Outbox/Outbox';
 import Login from '../screens/Auth/Login';
 import { Alert, BackHandler } from 'react-native';
 
