@@ -14,12 +14,11 @@ const Outbox = ({ navigation }) => {
       <ScrollView>
         <TouchableOpacity style={{marginTop: 2.5, marginHorizontal: '0.5%'}}>
           <View style={styles.mail}>
-            <View style={{ marginLeft: '5%', width: '10%' }}>
+            <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
               <Ionicons
                 name="mail"
                 color="#0394fc"
                 size={24}
-                style={{ marginTop: '60%' }}
               />
             </View>
             <View style={{ minWidth: '55%', marginLeft: '2.5%', marginVertical: 10 }}>

@@ -15,12 +15,11 @@ const Inbox = ({ navigation }) => {
       <ScrollView>
         <TouchableOpacity style={{marginTop: 2.5, marginHorizontal: '0.5%'}}>
           <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3 }}>
-            <View style={{ marginLeft: '5%', width: '10%' }}>
+            <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
               <Ionicons
                 name="mail"
                 color="#0394fc"
                 size={24}
-                style={{ marginTop: '80%' }}
               />
             </View>
             <View style={{ maxWidth: '60%', marginLeft: '2.5%' }}>

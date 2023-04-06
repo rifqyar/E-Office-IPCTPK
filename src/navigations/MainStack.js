@@ -10,6 +10,8 @@ import Home from '../screens/Home/Home';
 import Inbox from '../screens/Inbox/Inbox';
 import Outbox from '../screens/Outbox/Outbox';
 import Login from '../screens/Auth/Login';
+import AbsentList from '../screens/Absensi/AbsentList';
+import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import { Alert, BackHandler } from 'react-native';
 
 const ArrowBackButton = () => {
@@ -128,6 +130,40 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerRight: () => (
                             <>
                                 <SearchButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.ABSENT}
+                    component={AbsentList}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Absensi",
+                        headerStyle: {
+                            backgroundColor: '#006ba2',
+                        },
+                        headerTintColor: '#fff',
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.ABSENT_DETAIL}
+                    component={AbsentDetail}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Absen Mobile",
+                        headerStyle: {
+                            backgroundColor: '#006ba2',
+                        },
+                        headerTintColor: '#fff',
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
                             </>
                         )
                     }}
