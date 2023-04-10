@@ -6,5 +6,8 @@ export const MainRouteName = {
 
     //Absent
     ABSENT: 'Absent',
-    ABSENT_DETAIL: 'AbsentDetail'
+    ABSENT_DETAIL: 'AbsentDetail',
+
+    //Cuti
+    CUTI: 'Cuti'
   };

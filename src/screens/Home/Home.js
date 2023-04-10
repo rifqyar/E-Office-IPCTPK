@@ -109,15 +109,15 @@ const Home = ({navigation}) => {
             <Card style={{ marginTop: 20, marginHorizontal: '2.5%', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                 <CardMenuButton
-                  title={'Surat Masuk'} bgColor={'#FF4D00'} navigation={navigation} route={MainRouteName.INBOX}
+                  title={'Surat Masuk'} bgColor={COLORS.darkOrange} navigation={navigation} route={MainRouteName.INBOX}
                   imgSrc={require('../../assets/imgs/menu-icon/inbox-white.png')}
                 />
                 <CardMenuButton
-                  title={'Surat Keluar'} bgColor={'#fcce03'} navigation={navigation} route={MainRouteName.OUTBOX}
+                  title={'Surat Keluar'} bgColor={COLORS.lightYellow} navigation={navigation} route={MainRouteName.OUTBOX}
                   imgSrc={require('../../assets/imgs/menu-icon/outbox-white.png')}
                 />
                 <CardMenuButton
-                  title={'HadirKoe'} bgColor={'#e0e0de'}
+                  title={'HadirKoe'} bgColor={COLORS.lightGrey}
                   imgSrc={require('../../assets/flat-icon/hadirkoe.png')}
                 />
               </View>
@@ -130,7 +130,7 @@ const Home = ({navigation}) => {
                 imgSrc={require('../../assets/imgs/menu-icon/absensi.png')}
               />
               <SmallMenuButton
-                title={'Cuti/Izin'}
+                title={'Cuti/Izin'} navigation={navigation} route={MainRouteName.CUTI}
                 imgSrc={require('../../assets/imgs/menu-icon/cuti.png')}
               />
               <SmallMenuButton

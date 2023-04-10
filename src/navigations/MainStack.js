@@ -12,6 +12,7 @@ import Outbox from '../screens/Outbox/Outbox';
 import Login from '../screens/Auth/Login';
 import AbsentList from '../screens/Absensi/AbsentList';
 import AbsentDetail from '../screens/Absensi/AbsentDetail';
+import CutiList from '../screens/Cuti/CutiList';
 import { Alert, BackHandler } from 'react-native';
 
 const ArrowBackButton = () => {
@@ -164,6 +165,28 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.CUTI}
+                    component={CutiList}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Izin/Cuti",
+                        headerStyle: {
+                            backgroundColor: '#006ba2',
+                        },
+                        headerTintColor: '#fff',
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                        headerRight: () => (
+                            <>
+                                <SearchButton />
                             </>
                         )
                     }}
