@@ -59,8 +59,7 @@ const FormLogin = (props) => {
 
     handlePostData = () => {
         SetShowLoading(true)
-        //sementara langsung navigate
-        navigate(MainRouteName.HOME);
+        props.navigation.push(MainRouteName.HOME)
     }
 
     return (
