@@ -24,7 +24,6 @@ import {
 import { Switch } from 'react-native-gesture-handler'
 import LoadingScreen from '../LoadingScreen'
 import { MainRouteName } from '../../constants/mainRouteName'
-import { useNavigation } from '@react-navigation/native';
 // import axios from 'axios'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -59,8 +58,7 @@ const FormLogin = (props) => {
 
     handlePostData = () => {
         SetShowLoading(true)
-        //sementara langsung navigate
-        navigate(MainRouteName.HOME);
+        props.navigation.push(MainRouteName.HOME)
     }
 
     return (

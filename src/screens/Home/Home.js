@@ -7,6 +7,16 @@ import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
 import LinearGradient from 'react-native-linear-gradient';
 import { COLORS } from '../../constants/theme';
+import axios from 'axios';
+import soapCall from '../../helpers/soapCall';
+
+import {
+  api_base_url,
+  api_user,
+  api_pass,
+  api_base_url_hadirkoe,
+  api_p2b_url
+} from '../../../app.json'
 
 const CardMenuButton = ({ title, bgColor, imgSrc, navigation, route }) => {
   // const navigation = useNavigation();
@@ -39,9 +49,28 @@ const Home = ({navigation}) => {
     StatusBar.setBackgroundColor('#006ba2'); 
     StatusBar.setBarStyle('light-content')
 
+    getBadgesP2b()
+    getBadgesPrpro()
     return () => {
     }
   })
+
+  const getBadgesP2b = async () => {
+    const res = await soapCall(api_p2b_url, 'eoffice_countbadges', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      person_id: '',
+      nipp: '288108009',
+      idjabatan: '3423423',
+      id_user: '2767'
+    })
+
+    console.log(res)
+  }
+
+  const getBadgesPrpro = async () => {
+    console.log('test')
+  }
   
   return (
     <SafeAreaView>
