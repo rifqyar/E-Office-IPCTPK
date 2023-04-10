@@ -26,6 +26,8 @@ import LoadingScreen from '../LoadingScreen'
 import { MainRouteName } from '../../constants/mainRouteName'
 import { useDispatch } from 'react-redux'
 import { loading } from '../../redux/actions/loadingAction'
+import soapCall from '../../helpers/soapCall'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 // import axios from 'axios'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -56,8 +58,17 @@ const FormLogin = (props) => {
         }
     }
 
-    handlePostData = () => {
+    handlePostData = async () => {
         dispatch(loading())
+        soapCall(api_base_url, 'eoffice_login', {
+            usernameEDI: api_user,
+            passwordEDI: api_pass,
+            username: formValue.nipp,
+            password: formValue.password
+        }).then((res) => {
+            console.log(res)
+            AsyncStorage.setItem('user', res.data)
+        })
         // props.navigation.push(MainRouteName.HOME)
     }
 
