@@ -7,8 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
 import FormLogin from '../../components/Auth/FormLogin';
 import { SIZES } from '../../constants/theme';
+import { useSelector } from 'react-redux';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const Login = ({ navigation }) => {
+  const loading = useSelector((store) => store.loading.loading)
+
   useEffect(() => {
     StatusBar.setTranslucent(false)
     StatusBar.setBackgroundColor('#fff'); 
@@ -32,10 +36,15 @@ const Login = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
+      {
+        loading ? 
+          <LoadingScreen />
+        :
+          <View />
+      }
     </SafeAreaView>
   )
 }
-
 export default Login
 
 const styles = StyleSheet.create({

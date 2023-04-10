@@ -24,18 +24,17 @@ import {
 import { Switch } from 'react-native-gesture-handler'
 import LoadingScreen from '../LoadingScreen'
 import { MainRouteName } from '../../constants/mainRouteName'
-import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux'
+import { loading } from '../../redux/actions/loadingAction'
 // import axios from 'axios'
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const FormLogin = (props) => {
+    const dispatch = useDispatch()
     const [formValue, setFormValue] = useState([])
     const [errors, SetErrors] = useState([])
-    const [showLoading, SetShowLoading] = useState(false)
     const [securePassword, setSecurePassword] = useState(true)
     const [isSwitchOn, setSwitch] = useState(false)
-
-    const {navigate} = useNavigation();
 
     handleLoginButton = () => {
         let Err = {};
@@ -58,8 +57,8 @@ const FormLogin = (props) => {
     }
 
     handlePostData = () => {
-        SetShowLoading(true)
-        props.navigation.push(MainRouteName.HOME)
+        dispatch(loading())
+        // props.navigation.push(MainRouteName.HOME)
     }
 
     return (
@@ -118,7 +117,6 @@ const FormLogin = (props) => {
             </Card>
 
             <Button
-                loading={showLoading}
                 mode="elevated"
                 dark
                 style={{

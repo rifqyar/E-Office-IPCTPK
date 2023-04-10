@@ -30,6 +30,8 @@ import Home from './src/screens/Home/Home';
 import { Provider as PaperProvider } from 'react-native-paper';
 import RNBootSplash from "react-native-bootsplash";
 import LoadingScreen from './src/components/LoadingScreen';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -44,12 +46,13 @@ function App(): JSX.Element {
 
     // init().finally(async () => {
       RNBootSplash.hide({ fade: true, duration: 150 });
-      console.log("Bootsplash has been hidden successfully");
     // });
   }, []);
   return (
     <PaperProvider>
-      <NavigationProvider />
+      <Provider store={store}>
+        <NavigationProvider />
+      </Provider>
     </PaperProvider>
   );
 }
