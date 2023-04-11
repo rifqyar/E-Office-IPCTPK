@@ -162,7 +162,7 @@ const Home = ({navigation}) => {
             </View>
             <View style={{ marginTop: 25, flexDirection: 'row', marginHorizontal: '2.5%', alignItems: 'flex-start', minWidth: '92.5%' }}>
               <SmallMenuButton
-                title={'SPPD'}
+                title={'SPPD'} navigation={navigation} route={MainRouteName.SPPD}
                 imgSrc={require('../../assets/imgs/menu-icon/sppd-2.png')}
               />
             </View>

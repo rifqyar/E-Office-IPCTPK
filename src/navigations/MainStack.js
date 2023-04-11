@@ -13,6 +13,7 @@ import Login from '../screens/Auth/Login';
 import AbsentList from '../screens/Absensi/AbsentList';
 import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import CutiList from '../screens/Cuti/CutiList';
+import SppdList from '../screens/Sppd/SppdList';
 import { Alert, BackHandler } from 'react-native';
 
 const ArrowBackButton = () => {
@@ -175,6 +176,28 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                     options={{
                         headerShown: true,
                         headerTitle: "Izin/Cuti",
+                        headerStyle: {
+                            backgroundColor: '#006ba2',
+                        },
+                        headerTintColor: '#fff',
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                        headerRight: () => (
+                            <>
+                                <SearchButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.SPPD}
+                    component={SppdList}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "SPPD",
                         headerStyle: {
                             backgroundColor: '#006ba2',
                         },

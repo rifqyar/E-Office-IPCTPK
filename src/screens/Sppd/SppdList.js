@@ -8,29 +8,23 @@ import { MainRouteName } from '../../constants/mainRouteName';
 import truncate from '../../helpers/truncate';
 import { COLORS, SIZES } from '../../constants/theme';
 
-const Inbox = ({ navigation }) => {
+const SppdList = ({ navigation }) => {
   return (
     <View>
-      {/* <Text>inbox</Text> */}
-      {/* Sementara pakai scrollview */}
       <ScrollView style={{minHeight: '100%', backgroundColor: COLORS.white}}>
-        <TouchableOpacity style={{marginTop: 2.5, marginHorizontal: '0.5%'}}>
+        <TouchableOpacity style={styles.buttonStyle}>
           <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3 }}>
             <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
-              <Ionicons
-                name="mail"
-                color="#0394fc"
-                size={24}
+              <Image
+                source={require('../../assets/imgs/menu-icon/sppd.png')}
+                style={{ width: 28, height: 28 }}
               />
             </View>
-            <View style={{ maxWidth: '60%', marginLeft: '2.5%' }}>
-              <Text style={{ color: 'grey' }}>HM.608/21/12/1/IPCTPK-22</Text>
-              <Text style={{ fontWeight: 'bold' }}>Direktur Keunangan dan SDM</Text>
-              <Text>Pemberlakuan Sistem Administrasi Perkantoran Pelindo</Text>
-              <Text style={{color: '#0394fc'}}>01-FEB-23</Text>
-            </View>
-            <View style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
-              <Text style={{fontSize: 12, color: '#0394fc'}}>KEMBALIKAN</Text>
+            <View style={{ maxWidth: '80%', marginLeft: '2.5%', paddingVertical: 10 }}>
+              <Text style={{ color: COLORS.Blue, marginTop: 5 }}>Bogor</Text>
+              <Text>Menghadiri Join Planning Session (JPS) dan Penandatangan Nota Kesepakatan antara PT Integrasi Logistik Cipta Solusi dengan PT Microsoft Indonesia</Text>
+              <Text style={{ color: COLORS.Grey, marginTop: 5 }}>16-MAR-23 s/d 17-MAR-23</Text>
+              <Text style={{ fontSize: SIZES.body5, color: COLORS.Blue, marginTop: 5 }}>KIRIM</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -39,7 +33,7 @@ const Inbox = ({ navigation }) => {
   )
 }
 
-export default Inbox
+export default SppdList
 
 const styles = StyleSheet.create({
   buttonStyle: {
