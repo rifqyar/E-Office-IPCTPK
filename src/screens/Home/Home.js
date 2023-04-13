@@ -9,6 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { COLORS } from '../../constants/theme';
 import axios from 'axios';
 import soapCall from '../../helpers/soapCall';
+import { useSelector } from 'react-redux';
 
 import {
   api_base_url,
@@ -55,6 +56,9 @@ const Home = ({navigation}) => {
     }
   })
 
+  const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn); //test
+  const user = useSelector(state => state.userReducer.user); //test
+
   const getBadgesP2b = async () => {
     const res = await soapCall(api_p2b_url, 'eoffice_countbadges', {
       usernameEDI: api_user,
@@ -88,7 +92,8 @@ const Home = ({navigation}) => {
               style={{ marginRight: '5%' }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log(isLoggedIn)} //test
+            >
             <Ionicons
               name="settings-sharp"
               color="rgba(255, 255, 255, .9)"

@@ -80,16 +80,20 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                 routeNameRef.current = currentRouteName;
             }}
         >
-            <Stack.Navigator>
+            <Stack.Navigator
+                initialRouteName={
+                    isLoggedIn ? MainRouteName.HOME : MainRouteName.LOGIN
+                    // MainRouteName.HOME
+                }>
+                <Stack.Screen
+                    name={MainRouteName.HOME}
+                    component={Home}
+                    options={{ headerShown: false }}
+                />
                 {/* Login */}
                 <Stack.Screen
                     name={MainRouteName.LOGIN}
                     component={Login}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name={MainRouteName.HOME}
-                    component={Home}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

@@ -28,8 +28,9 @@ import { useDispatch } from 'react-redux'
 import { loading } from '../../redux/actions/loadingAction'
 import soapCall from '../../helpers/soapCall'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LOGIN_SUCCESS } from '../../constants/actionTypes'
+import { useSelector } from 'react-redux'
 // import axios from 'axios'
-// import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const FormLogin = (props) => {
     const dispatch = useDispatch()
@@ -68,6 +69,12 @@ const FormLogin = (props) => {
         }).then((res) => {
             console.log(res)
             AsyncStorage.setItem('user', res.data)
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: {user: res.data},
+              });
+            // console.log("userSelector->", useSelector(state => state.userReducer.user));
+            props.navigation.push(MainRouteName.HOME)
         })
         // props.navigation.push(MainRouteName.HOME)
     }
