@@ -22,21 +22,7 @@ import {
   api_base_url_hadirkoe,
   api_p2b_url
 } from '../../../app.json'
-import { useSelector } from 'react-redux';
-
-const CardMenuButton = ({ title, bgColor, imgSrc, navigation, route }) => {
-  // const navigation = useNavigation();
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate(route)}>
-      <View style={{ alignItems: 'center', marginHorizontal: '5%' }}>
-        <View style={{ backgroundColor: bgColor, height: 55, width: 55, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-          <Image source={imgSrc} style={{ height: 40, width: 40 }} />
-        </View>
-        <Text>{title}</Text>
-      </View>
-    </TouchableOpacity>
-  )
-}
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SmallMenuButton = ({ title, imgSrc, navigation, route }) => {
   return (
@@ -50,22 +36,19 @@ const SmallMenuButton = ({ title, imgSrc, navigation, route }) => {
 }
 
 const Home = ({navigation}) => {
-  const user = useSelector((store) => store.users.user)
-  console.log(user)
-
   useEffect(() => {
     StatusBar.setTranslucent(false)
     StatusBar.setBackgroundColor('#006ba2'); 
     StatusBar.setBarStyle('light-content')
 
-    getBadgesP2b()
-    getBadgesPrpro()
+    // getBadgesP2b()
+    // getBadgesPrpro()
     return () => {
     }
   })
 
   const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn); //test
-  const user = useSelector(state => state.userReducer.user); //test
+  const user = useSelector(state => state.userReducer.user.user); //test
 
   const getBadgesP2b = async () => {
     const res = await soapCall(api_p2b_url, 'eoffice_countbadges', {
@@ -87,44 +70,16 @@ const Home = ({navigation}) => {
       idjabatan: user.IDJABATAN,
       id_user: user.IDUSER
     })
-
-    console.log(res)
   }
   
+  if (typeof(user) != 'undefined')
   return (
     <SafeAreaView>
       <Header navigation={navigation} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ backgroundColor: COLORS.white }}>
-          <ImageBackground source={require('../../assets/imgs/header-bg-2.png')}>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: '2.5%'}}>
-              <View style={{marginTop: '2.5%'}}>
-                <Avatar.Image source={{uri: user.FOTO}}/>
-              </View>
-              <View style={{ marginLeft: '2.5%' }}>
-                <Text style={{ color: COLORS.white, marginTop: 10, fontSize: 16 }}>Welcome,</Text>
-                <Text style={{ color: COLORS.white, fontSize: 16, fontWeight: 'bold' }}>{user.NAMA}</Text>
-                <Caption style={{color:COLORS.white}}>{user.NAMAJABATAN}</Caption>
-              </View>
-            </View>
-            <Card style={{ marginTop: 20, marginHorizontal: '2.5%', alignItems: 'center' }}>
-              <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-                <CardMenuButton
-                  title={'Surat Masuk'} bgColor={COLORS.darkOrange} navigation={navigation} route={MainRouteName.INBOX}
-                  imgSrc={require('../../assets/imgs/menu-icon/inbox-white.png')}
-                />
-                <CardMenuButton
-                  title={'Surat Keluar'} bgColor={COLORS.lightYellow} navigation={navigation} route={MainRouteName.OUTBOX}
-                  imgSrc={require('../../assets/imgs/menu-icon/outbox-white.png')}
-                />
-                <CardMenuButton
-                  title={'HadirKoe'} bgColor={COLORS.lightGrey}
-                  imgSrc={require('../../assets/flat-icon/hadirkoe.png')}
-                />
-              </View>
-            </Card>
-          </ImageBackground>
+          
           <View style={{ alignItems: 'center', marginBottom: 15 }}>
             <View style={{ marginTop: 25, flexDirection: 'row', marginHorizontal: '2.5%' }}>
               <SmallMenuButton

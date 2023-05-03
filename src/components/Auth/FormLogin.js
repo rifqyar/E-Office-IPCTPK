@@ -73,7 +73,7 @@ const FormLogin = (props) => {
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {user: res.data},
-              });
+            });
             // console.log("userSelector->", useSelector(state => state.userReducer.user));
             props.navigation.push(MainRouteName.HOME)
         })

@@ -3,34 +3,43 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MainStack from './MainStack';
 import { setUser } from '../redux/actions/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SET_USER } from '../constants/actionTypes';
+import { loading } from '../redux/actions/loadingAction';
 
 const NavigationProvider = () => {
-    const user = useSelector(state => state.userReducer.user);
-    const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+    const dispatch = useDispatch()
+    // const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+    const [isLoggedIn, setIsLoggedIn] = useState(null)
 
     useEffect(() => {
         getUser();
-        console.log(user);
-      }, [isLoggedIn]);
+    });
 
     const getUser = async () => {
         try {
-            const user = await AsyncStorage.getItem('user');
-            if (user) {
-                let authState = { isLoggedIn: true, user: user };
-                dispatch(setUser(authState));
+            var user = await AsyncStorage.getItem('user');
+            user = JSON.parse(user)
+            if (user != null) {
+                setIsLoggedIn(true)
+                dispatch({
+                    type: SET_USER,
+                    payload: {user: user, isLoggedIn: true},
+                });
             } else {
                 let authState = { isLoggedIn: false, user: null };
+                setIsLoggedIn(false)
                 dispatch(setUser(authState));
             }
         } catch (error) { }
     };
 
-
-    return (
-        <MainStack isLoggedIn={isLoggedIn} />
-        // <MainStack />
-    )
+    if (isLoggedIn != null){
+        return (
+            <MainStack isLoggedIn={isLoggedIn} />
+            // <MainStack />
+        )
+    }
 }
 
 export default NavigationProvider
