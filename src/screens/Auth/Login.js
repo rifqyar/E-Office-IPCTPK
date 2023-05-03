@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react'
 import { View, Image, ImageBackground, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 import { Text, Caption } from 'react-native-paper';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
-import { MainRouteName } from '../../constants/mainRouteName';
 import FormLogin from '../../components/Auth/FormLogin';
 import { SIZES } from '../../constants/theme';
 import { useSelector } from 'react-redux';

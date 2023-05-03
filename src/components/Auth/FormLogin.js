@@ -30,6 +30,7 @@ import soapCall from '../../helpers/soapCall'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { LOGIN_SUCCESS } from '../../constants/actionTypes'
 import { useSelector } from 'react-redux'
+import { setUser } from '../../redux/actions/userAction'
 // import axios from 'axios'
 
 const FormLogin = (props) => {
@@ -67,8 +68,8 @@ const FormLogin = (props) => {
             username: formValue.nipp,
             password: formValue.password
         }).then((res) => {
-            console.log(res)
-            AsyncStorage.setItem('user', res.data)
+            AsyncStorage.setItem('user', JSON.stringify(res.data))
+
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {user: res.data},
@@ -76,7 +77,7 @@ const FormLogin = (props) => {
             // console.log("userSelector->", useSelector(state => state.userReducer.user));
             props.navigation.push(MainRouteName.HOME)
         })
-        // props.navigation.push(MainRouteName.HOME)
+
     }
 
     return (
@@ -117,6 +118,9 @@ const FormLogin = (props) => {
                 error={errors.password}
                 dense
                 left={<TextInput.Icon icon="lock" />}
+                right={<TextInput.Icon icon={securePassword ? "eye" : "eye-off"} onPress={() => {
+                    setSecurePassword(!securePassword)
+                }}/>}
 
             />
             <HelperText type="error" visible={errors.password ? true : false }>

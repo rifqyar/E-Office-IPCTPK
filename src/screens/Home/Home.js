@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react'
 import { View, ScrollView, Image, ImageBackground, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import { Text, Card, Caption } from 'react-native-paper';
+import { Text, Card, Caption, Avatar } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
 import LinearGradient from 'react-native-linear-gradient';
-import { COLORS } from '../../constants/theme';
+import { COLORS, SIZES } from '../../constants/theme';
 import axios from 'axios';
 import soapCall from '../../helpers/soapCall';
+
+import {
+  Header
+} from '../../components/Home/Index'
 import { useSelector } from 'react-redux';
 
 import {
@@ -18,6 +22,7 @@ import {
   api_base_url_hadirkoe,
   api_p2b_url
 } from '../../../app.json'
+import { useSelector } from 'react-redux';
 
 const CardMenuButton = ({ title, bgColor, imgSrc, navigation, route }) => {
   // const navigation = useNavigation();
@@ -45,6 +50,9 @@ const SmallMenuButton = ({ title, imgSrc, navigation, route }) => {
 }
 
 const Home = ({navigation}) => {
+  const user = useSelector((store) => store.users.user)
+  console.log(user)
+
   useEffect(() => {
     StatusBar.setTranslucent(false)
     StatusBar.setBackgroundColor('#006ba2'); 
@@ -64,52 +72,41 @@ const Home = ({navigation}) => {
       usernameEDI: api_user,
       passwordEDI: api_pass,
       person_id: '',
-      nipp: '288108009',
-      idjabatan: '3423423',
-      id_user: '2767'
+      nipp: user.NIPP,
+      idjabatan: user.IDJABATAN,
+      id_user: user.IDUSER
+    })
+  }
+
+  const getBadgesPrpro = async () => {
+    const res = await soapCall(api_p2b_url, 'eoffice_countbadgestpk', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      person_id: '',
+      nipp: user.NIPP,
+      idjabatan: user.IDJABATAN,
+      id_user: user.IDUSER
     })
 
     console.log(res)
   }
-
-  const getBadgesPrpro = async () => {
-    console.log('test')
-  }
   
   return (
     <SafeAreaView>
-      <View style={ styles.header }>
-        <View style={{ flexDirection: 'row', width: '50%', marginVertical: 10 }}>
-          <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
-          <Text style={{ color: COLORS.white, marginTop: 7.5, marginLeft: 7.5, fontSize: 20 }}>E-Office</Text>
-        </View>
-        <View style={{ flexDirection: 'row-reverse', width: '50%', marginTop: 17.5 }}>
-          <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.LOGIN)}>
-            <AntDesign
-              name="logout"
-              color="rgba(255, 255, 255, .9)"
-              size={24}
-              style={{ marginRight: '5%' }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log(isLoggedIn)} //test
-            >
-            <Ionicons
-              name="settings-sharp"
-              color="rgba(255, 255, 255, .9)"
-              size={24}
-              style={{ marginRight: '5%' }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Header navigation={navigation} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ backgroundColor: COLORS.white }}>
           <ImageBackground source={require('../../assets/imgs/header-bg-2.png')}>
-            <View style={{ marginLeft: '2.5%' }}>
-              <Text style={{ color: COLORS.white, marginTop: 10, fontSize: 16 }}>Welcome,</Text>
-              <Text style={{ color: COLORS.white, fontSize: 16, fontWeight: 'bold' }}>user</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: '2.5%'}}>
+              <View style={{marginTop: '2.5%'}}>
+                <Avatar.Image source={{uri: user.FOTO}}/>
+              </View>
+              <View style={{ marginLeft: '2.5%' }}>
+                <Text style={{ color: COLORS.white, marginTop: 10, fontSize: 16 }}>Welcome,</Text>
+                <Text style={{ color: COLORS.white, fontSize: 16, fontWeight: 'bold' }}>{user.NAMA}</Text>
+                <Caption style={{color:COLORS.white}}>{user.NAMAJABATAN}</Caption>
+              </View>
             </View>
             <Card style={{ marginTop: 20, marginHorizontal: '2.5%', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', marginVertical: 10 }}>
@@ -220,10 +217,3 @@ const Home = ({navigation}) => {
 }
 
 export default Home
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row', 
-    backgroundColor: '#006ba2'
-  }
-})

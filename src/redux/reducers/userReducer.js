@@ -1,7 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, SET_USER, CLEAR_AUTH_STATE } from "../../constants/actionTypes";
 const initialState = {
-    user: 'TESTING',
-    isLoggedIn: null
+    user: false
 }
 
 const userReducer = (state = initialState, action) => {
@@ -38,10 +37,6 @@ const userReducer = (state = initialState, action) => {
             user: null,
         };
         default:
-        return {
-          ...state
-        }
+            return state;
     }
-}
-
-export default userReducer;
+};
