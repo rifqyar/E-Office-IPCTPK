@@ -6,8 +6,8 @@ export default truncate = (str, length) => {
         return str;
       }
     } else {
-      if (str.length > 30) {
-        return str.slice(0, 30) + '...';
+      if (str.length > 60) {
+        return str.slice(0, 60) + '...';
       } else {
         return str;
       }

@@ -1,40 +1,100 @@
-import React from 'react'
-import { View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, Card } from 'react-native-paper';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
-import { MainRouteName } from '../../constants/mainRouteName';
-import truncate from '../../helpers/truncate';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { loading } from '../../redux/actions/loadingAction';
 import { COLORS, SIZES } from '../../constants/theme';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  api_base_url,
+  api_user,
+  api_pass
+} from '../../../app.json'
+import soapCall from '../../helpers/soapCall';
+import ButtonListInbox from './components/ButtonListInbox';
 
 const Inbox = ({ navigation }) => {
+  const user = useSelector(state => state.userReducer.user);
+  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const flatListRef = React.useRef();
+  const [inboxes, setInboxes] = useState([]);
+  const [atLastPage, setAtLastPage] = useState(false);
+
+  useEffect(() => {
+    getInbox();
+  }, []);
+
+  const getInbox = async () => {
+    dispatch(loading());
+    soapCall(api_base_url, 'eoffice_inbox', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      iduser: user.user.IDUSER,
+      idjabatan: user.user.IDJABATAN,
+      page: currentPage,
+      jmlpage: '20',
+      perihal: "",
+      tanggalawal: "",
+      tanggalakhir: "",
+      sorting: "1",
+      filter: "0"
+    }).then((res) => {
+      // console.log(res)
+      setInboxes(res.data.List_Inbox);
+    })
+  }
+
+  const handlePagination = async () => {
+    let newPage = currentPage + 1;
+    setCurrentPage(newPage);
+    if (atLastPage) {
+      return;
+    } else {
+      let params = {
+        usernameEDI: api_user,
+        passwordEDI: api_pass,
+        iduser: user.user.IDUSER,
+        idjabatan: user.user.IDJABATAN,
+        page: newPage,
+        jmlpage: '20',
+        perihal: "",
+        tanggalawal: "",
+        tanggalakhir: "",
+        sorting: "1",
+        filter: "0"
+      }
+      dispatch(loading());
+      soapCall(api_base_url, 'eoffice_inbox', params).then((res) => {
+        const newList = inboxes.concat(res.data.List_Inbox);
+        const newData = res.data.List_Inbox;
+        // console.log(newData.length)
+        if (newData.length < 20){
+          setAtLastPage(false);
+        }
+        setInboxes(newList);
+      })
+    }
+  }
+
   return (
     <View>
-      {/* <Text>inbox</Text> */}
-      {/* Sementara pakai scrollview */}
-      <ScrollView style={{minHeight: '100%', backgroundColor: COLORS.white}}>
-        <TouchableOpacity style={{marginTop: 2.5, marginHorizontal: '0.5%'}}>
-          <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3 }}>
-            <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
-              <Ionicons
-                name="mail"
-                color="#0394fc"
-                size={24}
-              />
-            </View>
-            <View style={{ maxWidth: '60%', marginLeft: '2.5%' }}>
-              <Text style={{ color: 'grey' }}>HM.608/21/12/1/IPCTPK-22</Text>
-              <Text style={{ fontWeight: 'bold' }}>Direktur Keunangan dan SDM</Text>
-              <Text>Pemberlakuan Sistem Administrasi Perkantoran Pelindo</Text>
-              <Text style={{color: '#0394fc'}}>01-FEB-23</Text>
-            </View>
-            <View style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
-              <Text style={{fontSize: 12, color: '#0394fc'}}>KEMBALIKAN</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
+      <FlatList
+        style={{ minHeight: '100%', backgroundColor: COLORS.white }}
+        nestedScrollEnabled={true}
+        vertical
+        data={inboxes}
+        // keyExtractor={(item, index) => item.id}
+        renderItem={({ item, index }) => {
+          return (
+            <ButtonListInbox
+              key={item.id}
+              data={item}
+            // nav={() => functionNavigate(item.id)}
+            />
+          );
+        }}
+        onEndReached={() => handlePagination()}
+        onEndReachedThreshold={0.2}
+      />
     </View>
   )
 }
@@ -43,8 +103,8 @@ export default Inbox
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 5, 
-    marginHorizontal: '0.5%', 
+    marginTop: 5,
+    marginHorizontal: '0.5%',
     backgroundColor: COLORS.white,
     borderWidth: 0.1,
     borderRadius: 2,
