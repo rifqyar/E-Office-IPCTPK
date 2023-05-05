@@ -10,7 +10,7 @@ import truncate from '../../../helpers/truncate';
 const ButtonListInbox = ({ data }) => {
   return (
     <TouchableOpacity style={{marginVertical: 5, width: '97.5%', marginHorizontal: '0.5%'}}>
-      <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3 }}>
+      <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3, height: 120 }}>
         <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
           <Ionicons
             name="mail"
@@ -18,7 +18,7 @@ const ButtonListInbox = ({ data }) => {
             size={24}
           />
         </View>
-        <View style={{ width: '59%', marginLeft: '2.5%' }}>
+        <View style={{ width: '59%', marginLeft: '2.5%', justifyContent: 'space-evenly' }}>
           <Text style={{ color: 'grey' }}>{data.No_Surat}</Text>
           <Text style={{ fontWeight: 'bold' }}>{data.Dari}</Text>
           <Text>{truncate(data.Perihal)}</Text>
