@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* EOfficeTPKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EOfficeTPKTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-EOfficeTPK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-EOfficeTPK.a */; };
+		05C56B7846AFB3C0A6ABB678 /* libPods-EOfficeTPK-EOfficeTPKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00498F6838C2FBACA9F984F4 /* libPods-EOfficeTPK-EOfficeTPKTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-EOfficeTPK-EOfficeTPKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-EOfficeTPK-EOfficeTPKTests.a */; };
 		782E1E2B29DD5C50006DF86E /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782E1E2A29DD5C50006DF86E /* BootSplash.storyboard */; };
 		782E1E2C29DD5C50006DF86E /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782E1E2A29DD5C50006DF86E /* BootSplash.storyboard */; };
 		7839D5AC29D2B78E00C93B92 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D59C29D2B78E00C93B92 /* FontAwesome5_Regular.ttf */; };
@@ -32,6 +31,7 @@
 		7839D5BA29D2B78E00C93B92 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D5AA29D2B78E00C93B92 /* Zocial.ttf */; };
 		7839D5BB29D2B78E00C93B92 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D5AB29D2B78E00C93B92 /* FontAwesome.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B2A53B1D5B16C5241A610686 /* libPods-EOfficeTPK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A0D1A55A27CFFC304148D5 /* libPods-EOfficeTPK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00498F6838C2FBACA9F984F4 /* libPods-EOfficeTPK-EOfficeTPKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EOfficeTPK-EOfficeTPKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356EE1AD99517003FC87E /* EOfficeTPKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EOfficeTPKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* EOfficeTPKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOfficeTPKTests.m; sourceTree = "<group>"; };
@@ -54,11 +55,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EOfficeTPK/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EOfficeTPK/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EOfficeTPK/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-EOfficeTPK-EOfficeTPKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EOfficeTPK-EOfficeTPKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-EOfficeTPK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK.debug.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-EOfficeTPK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK.release.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-EOfficeTPK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EOfficeTPK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49A0D1A55A27CFFC304148D5 /* libPods-EOfficeTPK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EOfficeTPK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6C3EBF7760A42479A85FF8 /* Pods-EOfficeTPK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK.release.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK.release.xcconfig"; sourceTree = "<group>"; };
 		782E1E2A29DD5C50006DF86E /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = EOfficeTPK/BootSplash.storyboard; sourceTree = "<group>"; };
 		7839D59C29D2B78E00C93B92 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		7839D59D29D2B78E00C93B92 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -77,7 +75,9 @@
 		7839D5AA29D2B78E00C93B92 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		7839D5AB29D2B78E00C93B92 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EOfficeTPK/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; sourceTree = "<group>"; };
+		A28676190113131205C7D10F /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; sourceTree = "<group>"; };
+		A6A27EB7761D656B407E3AE9 /* Pods-EOfficeTPK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK.debug.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK.debug.xcconfig"; sourceTree = "<group>"; };
+		C583231CDE75A3A5910FE1C5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-EOfficeTPK-EOfficeTPKTests.a in Frameworks */,
+				05C56B7846AFB3C0A6ABB678 /* libPods-EOfficeTPK-EOfficeTPKTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-EOfficeTPK.a in Frameworks */,
+				B2A53B1D5B16C5241A610686 /* libPods-EOfficeTPK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-EOfficeTPK.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-EOfficeTPK-EOfficeTPKTests.a */,
+				49A0D1A55A27CFFC304148D5 /* libPods-EOfficeTPK.a */,
+				00498F6838C2FBACA9F984F4 /* libPods-EOfficeTPK-EOfficeTPKTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -200,10 +200,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-EOfficeTPK.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-EOfficeTPK.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */,
+				A6A27EB7761D656B407E3AE9 /* Pods-EOfficeTPK.debug.xcconfig */,
+				6A6C3EBF7760A42479A85FF8 /* Pods-EOfficeTPK.release.xcconfig */,
+				C583231CDE75A3A5910FE1C5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */,
+				A28676190113131205C7D10F /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -215,12 +215,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EOfficeTPKTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				9B0036376A542EAD54D55F3C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				962999C9A3FA9096D99E6AB2 /* [CP] Embed Pods Frameworks */,
+				B8BB1D725A6A7778D3B26AD4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,14 +236,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EOfficeTPK" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				15615C08EE9820B1E5B4C23C /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				E3212363BBED39820547A9C3 /* [CP] Embed Pods Frameworks */,
+				F62D9AE149278BC3BA0213BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,46 +344,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EOfficeTPK-EOfficeTPKTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		15615C08EE9820B1E5B4C23C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -405,7 +366,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		962999C9A3FA9096D99E6AB2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -422,24 +383,29 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		9B0036376A542EAD54D55F3C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EOfficeTPK-EOfficeTPKTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		B8BB1D725A6A7778D3B26AD4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -454,6 +420,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3212363BBED39820547A9C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F62D9AE149278BC3BA0213BB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -508,7 +508,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */;
+			baseConfigurationReference = C583231CDE75A3A5910FE1C5 /* Pods-EOfficeTPK-EOfficeTPKTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 32S5HFGCZU;
@@ -536,7 +536,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */;
+			baseConfigurationReference = A28676190113131205C7D10F /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -561,7 +561,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-EOfficeTPK.debug.xcconfig */;
+			baseConfigurationReference = A6A27EB7761D656B407E3AE9 /* Pods-EOfficeTPK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -591,7 +591,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-EOfficeTPK.release.xcconfig */;
+			baseConfigurationReference = 6A6C3EBF7760A42479A85FF8 /* Pods-EOfficeTPK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
