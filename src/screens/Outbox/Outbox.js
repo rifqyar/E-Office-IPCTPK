@@ -15,7 +15,7 @@ import {
   api_pass
 } from '../../../app.json'
 import soapCall from '../../helpers/soapCall';
-import ButtonListOutbox from './components/ButtonListOutbox';
+import ButtonListOutbox from '../../components/Outbox/ButtonListOutbox';
 
 const Outbox = ({ navigation }) => {
   const user = useSelector(state => state.userReducer.user);

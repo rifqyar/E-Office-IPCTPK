@@ -5,12 +5,24 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { MainRouteName } from '../../constants/mainRouteName';
-import truncate from '../../../helpers/truncate';
+import truncate from '../../helpers/truncate';
+import { COLORS } from '../../constants/theme';
 
 const ButtonListInbox = ({ data }) => {
+  const navigation = useNavigation();
+
+  // console.log(data.IsBaca)
+  let bgColor;
+  if (data.IsBaca){
+    bgColor = COLORS.white
+  } else {
+    bgColor = COLORS.lightGrey
+  }
+
   return (
-    <TouchableOpacity style={{marginVertical: 5, width: '97.5%', marginHorizontal: '0.5%'}}>
-      <View style={{ flexDirection: 'row', borderLeftColor: '#ce03fc', borderLeftWidth: 3, height: 120 }}>
+    <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.INBOX_DETAIL)} 
+    style={{marginVertical: 5, marginHorizontal: '0.5%', backgroundColor: bgColor}}>
+      <View style={{ flexDirection: 'row', borderLeftColor: COLORS.lightPurple, borderLeftWidth: 3, height: 120 }}>
         <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
           <Ionicons
             name="mail"
@@ -24,9 +36,9 @@ const ButtonListInbox = ({ data }) => {
           <Text>{truncate(data.Perihal)}</Text>
           <Text style={{ color: '#0394fc' }}>{data.Tanggal_Surat}</Text>
         </View>
-        <View style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
+        <TouchableOpacity onPress={() => console.log("Kembalikan")} style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
           <Text style={{ fontSize: 12, color: '#0394fc' }}>KEMBALIKAN</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   )

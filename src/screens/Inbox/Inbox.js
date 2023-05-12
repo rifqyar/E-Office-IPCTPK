@@ -9,7 +9,7 @@ import {
   api_pass
 } from '../../../app.json'
 import soapCall from '../../helpers/soapCall';
-import ButtonListInbox from './components/ButtonListInbox';
+import ButtonListInbox from '../../components/Inbox/ButtonListInbox';
 
 const Inbox = ({ navigation }) => {
   const user = useSelector(state => state.userReducer.user);

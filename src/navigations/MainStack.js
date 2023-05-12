@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import { ArrowLeft2, SearchNormal1 } from 'iconsax-react-native';
 import { MainRouteName } from '../constants/mainRouteName';
+import { COLORS } from '../constants/theme';
 
 import Home from '../screens/Home/Home';
 import Inbox from '../screens/Inbox/Inbox';
@@ -14,6 +15,7 @@ import AbsentList from '../screens/Absensi/AbsentList';
 import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import CutiList from '../screens/Cuti/CutiList';
 import SppdList from '../screens/Sppd/SppdList';
+import InboxDetail from '../screens/Inbox/InboxDetail';
 import { Alert, BackHandler } from 'react-native';
 
 const ArrowBackButton = () => {
@@ -21,7 +23,7 @@ const ArrowBackButton = () => {
     return (
         <ArrowLeft2
             size="24"
-            color="#fff"
+            color={COLORS.white}
             onPress={() => {
                 navigation.goBack();
             }}
@@ -35,7 +37,7 @@ const SearchButton = () => {
     return (
         <SearchNormal1
             size="24"
-            color="#fff"
+            color={COLORS.white}
             // onPress={() => {
             //     navigation.goBack();
             // }}
@@ -103,9 +105,31 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "Surat Masuk",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                        headerRight: () => (
+                            <>
+                                <SearchButton />
+                            </>
+                        ),
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.INBOX_DETAIL}
+                    component={InboxDetail}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "",
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
@@ -125,9 +149,9 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "Surat Keluar",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
@@ -147,9 +171,9 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "Absensi",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
@@ -164,9 +188,9 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "Absen Mobile",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
@@ -181,9 +205,9 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "Izin/Cuti",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />
@@ -203,9 +227,9 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerShown: true,
                         headerTitle: "SPPD",
                         headerStyle: {
-                            backgroundColor: '#006ba2',
+                            backgroundColor: COLORS.Blue,
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: COLORS.white,
                         headerLeft: () => (
                             <>
                                 <ArrowBackButton />

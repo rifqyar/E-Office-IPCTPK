@@ -3,8 +3,34 @@ import { View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-nat
 import { Text, Card } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES } from '../../constants/theme';
+import { loading } from '../../redux/actions/loadingAction';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  api_base_url,
+  api_user,
+  api_pass
+} from '../../../app.json'
+import soapCall from '../../helpers/soapCall';
 
 const AbsentDetail = ({ navigation }) => {
+  const user = useSelector(state => state.userReducer.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAbsenDetail();
+  }, []);
+
+  const getAbsenDetail = async () => {
+    dispatch(loading());
+    soapCall(api_base_url, 'am6_detail_absen', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      iduser: user.user.IDUSER,
+    }).then((res) => {
+      // console.log(res)
+      setInboxes(res.data.List_Inbox);
+    })
+  }
 
   return (
     <View>

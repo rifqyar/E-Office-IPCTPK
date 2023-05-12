@@ -29,7 +29,7 @@ const ListMenu = (props) => {
             icon: 'calendar-check-outline',
             color: COLORS.Green,
             backgroundColor: COLORS.lightGreen,
-            route: '',
+            route: MainRouteName.CUTI,
             description: 'Cuti / Izin',
             isShow: true
         },{

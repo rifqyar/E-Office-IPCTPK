@@ -5,34 +5,120 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { COLORS } from '../../constants/theme';
 import { MainRouteName } from '../../constants/mainRouteName';
+import AbsentListButton from '../../components/Absensi/AbsentListButton';
+import { loading } from '../../redux/actions/loadingAction';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  api_base_url,
+  api_user,
+  api_pass
+} from '../../../app.json'
+import soapCall from '../../helpers/soapCall';
 
 const AbsentList = ({ navigation }) => {
+  const user = useSelector(state => state.userReducer.user);
+  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const flatListRef = React.useRef();
+
+  const currentMonth = new Date().getMonth() + 1; //To get the Current Month
+  const currentYear = new Date().getFullYear(); //To get the Current Year
+
+  const monthConst = [
+    { label: 'Januari', value: 1 },
+    { label: 'Februari', value: 2 },
+    { label: 'Maret', value: 3 },
+    { label: 'April', value: 4 },
+    { label: 'Mei', value: 5 },
+    { label: 'Juni', value: 6 },
+    { label: 'Juli', value: 7 },
+    { label: 'Agustus', value: 8 },
+    { label: 'September', value: 9 },
+    { label: 'Oktober', value: 10 },
+    { label: 'November', value: 11 },
+    { label: 'Desember', value: 12 },
+  ]
+
+  const [dataAbsentList, setDataAbsentList] = useState([])
+  const [isLoading, setIsLoading] = useState(false); 
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
+  const [monthEmpty, setMonthEmpty] = useState(false);
+  const [yearEmpty, setYearEmpty] = useState(false);
 
   const [openMonths, setOpenMonths] = useState(false);
-  const [dataMonths, setDataMonths] = useState([
-    { label: 'Januari', value: 'jan' },
-    { label: 'Februari', value: 'feb' },
-    { label: 'Maret', value: 'mar' },
-    { label: 'April', value: 'apr' }
-  ]);
+  const [dataMonths, setDataMonths] = useState([]);
   const [openYears, setOpenYears] = useState(false);
-  const [dataYears, setDataYears] = useState([
-    { label: 2020, value: 2020 },
-    { label: 2021, value: 2021 },
-    { label: 2022, value: 2022 },
-    { label: 2023, value: 2023 }
-  ])
+  const [dataYears, setDataYears] = useState([])
+
+  useEffect(() => {
+    getDataYears();
+    setDataMonths(monthConst); //sementara
+  }, []);
+
+  const getDataYears = () => {
+    let tempDataYears = [];
+    for (let i=0; i<10; i++){
+      tempDataYears.push({ label: currentYear-i, value: currentYear-i});
+    }
+    setDataYears(tempDataYears);
+  }
+
+  const openDropdownMonth = () => {
+    setOpenMonths(true);
+    setOpenYears(false);
+  }
+
+  const openDropdownYear = () => {
+    setOpenMonths(false);
+    setOpenYears(true);
+  }
+
+  const getAbsen = async() => {
+    if (!month || !year){
+      if (!month){
+        setMonthEmpty(true);
+      } else {
+        setMonthEmpty(false);
+      }
+      if (!year){
+        setYearEmpty(true);
+      } else {
+        setYearEmpty(false);
+      }
+      return;
+    }
+    setIsLoading(true);
+    dispatch(loading());
+    soapCall(api_base_url, 'eoffice_absen_list', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      nipp: user.user.NIPP,
+      bulan: month,
+      tahun: year
+    }).then((res) => {
+      // console.log(res.data)
+      setMonthEmpty(false);
+      setYearEmpty(false);
+      setIsLoading(false);
+      setDataAbsentList(res.data);
+    })
+  }
 
   return (
     <View>
       <ScrollView style={styles.container}>
         <View>
-          {/* Header */}
+          {
+            (monthEmpty) &&
+            <Text style={{ color: 'red', marginLeft: '2.5%', marginTop: 5 }}>
+              Bulan Belum Dipilih
+            </Text>
+          }         
           <DropDownPicker
             zIndex={3000}
-            placeholder=""
+            placeholder="--- Pilih Bulan ---"
+            placeholderStyle={{color: 'grey', textAlign: 'center'}}
             open={openMonths}
             value={month}
             items={dataMonths}
@@ -50,9 +136,16 @@ const AbsentList = ({ navigation }) => {
             }}
             dropDownContainerStyle={styles.dropDownContainerStyle}
           />
+          {
+            (yearEmpty) &&
+            <Text style={{ color: 'red', marginLeft: '2.5%', marginTop: 5 }}>
+              Tahun Belum Dipilih
+            </Text>
+          }          
           <DropDownPicker
             zIndex={3000}
-            placeholder=""
+            placeholder="--- Pilih Tahun ---"
+            placeholderStyle={{color: 'grey', textAlign: 'center'}}
             open={openYears}
             value={year}
             items={dataYears}
@@ -70,7 +163,7 @@ const AbsentList = ({ navigation }) => {
             }}
             dropDownContainerStyle={styles.dropDownContainerStyle}
           />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity onPress={getAbsen} style={styles.searchButton}>
             <Ionicons
               name="search"
               color="rgba(255, 255, 255, .9)"
@@ -81,35 +174,21 @@ const AbsentList = ({ navigation }) => {
           </TouchableOpacity>
 
           {/* List Absent */}
-          <View style={{ marginTop: 2.5, marginHorizontal: '0.5%', zIndex: 1 }}>
-            <View style={{ flexDirection: 'row', borderWidth: 0.1, borderRadius: 2 }}>
-              <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>
-                <Image
-                  source={require('../../assets/imgs/menu-icon/absensi.png')} 
-                  style={{ height: 30, width: 30 }}
-                 />
-              </View>
-              <View style={{ minWidth: '50%', marginLeft: '2.5%' }}>
-                <Text style={{ fontWeight: 'bold', marginTop: 5}}>Tanggal 1 - Sabtu</Text>
-                <Text style={{ color: COLORS.Grey, marginTop: 5  }}>Datang: - | Status: -</Text>
-                <Text style={{ color: COLORS.Grey }}>Ket Datang:</Text>
-                <Text style={{ color: COLORS.Grey }}>-</Text>
-                <Text style={{ color: COLORS.Grey, marginTop: 5 }}>Pulang: - | Status: -</Text>
-                <Text style={{ color: COLORS.Grey }}>Ket Pulang:</Text>
-                <Text style={{ color: COLORS.Grey }}>-</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(MainRouteName.ABSENT_DETAIL)}
-                style={{ minWidth: '25%', alignItems: 'flex-end', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}
-              >
-                <Text style={{ fontSize: 12, color: '#0394fc' }}>Sabtu</Text>
-                <Image
-                  source={require('../../assets/flat-icon/absen_mobile.png')} 
-                  style={{ height: 25, width: 25, marginTop: 5 }}
-                 />
-              </TouchableOpacity>
-            </View>
-          </View>
+          <View style={{minHeight: 200}}>
+            {
+              (isLoading) &&
+              <>
+                <View style={{height: 100, justifyContent: 'center', alignItems: 'center'}}>
+                  <Text>Loading...</Text>
+                </View>
+              </>
+            }
+            {
+              dataAbsentList?.map((dataAbsen) => {
+                return <AbsentListButton data={dataAbsen} />
+              })
+            }
+          </View>          
         </View>
       </ScrollView>
     </View>
@@ -132,7 +211,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: '95%',
     marginLeft: '2.5%',
-    marginVertical: 10
+    marginVertical: 10,
   },
   dropDownContainerStyle: {
     borderWidth: 1,
@@ -142,6 +221,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     opacity: 100,
     borderColor: '#DCDCDC',
+    width: '95%',
+    marginLeft: '2.5%',
   },
   searchButton: {
     width: '95%',
