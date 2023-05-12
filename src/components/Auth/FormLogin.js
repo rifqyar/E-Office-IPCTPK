@@ -128,7 +128,7 @@ const FormLogin = (props) => {
             </HelperText>
 
             <Card style={styles.verificationCard}>
-                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
                     <View style={{width: '70%'}}>
                         <Text>Swipe to right to confirm you are not robot</Text>
                     </View>

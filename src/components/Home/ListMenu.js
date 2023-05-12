@@ -11,11 +11,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { COLORS, FONTS, SIZES } from '../../constants/theme'
 import { MainRouteName } from '../../constants/mainRouteName'
 import { FlatList } from 'react-native-gesture-handler'
+import { Badge } from 'react-native-paper'
+import { useSelector } from 'react-redux'
 
 const ListMenu = (props) => {
-    const { navigation } = props
+    const { navigation, badgeList, badgeListPrPo, dataValidasi } = props
+    const user = useSelector(state => state.userReducer.user.user); //test
 
-    const [listMenu, setListMenu] = useState([
+    const listMenu = [
         {
             id: 1,
             icon: 'calendar-clock-outline',
@@ -23,7 +26,7 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightPurple,
             route: MainRouteName.ABSENT,
             description: 'Absensi',
-            isShow: true
+            isShow: !user.TNO
         },{
             id: 2,
             icon: 'calendar-check-outline',
@@ -31,7 +34,7 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightGreen,
             route: MainRouteName.CUTI,
             description: 'Cuti / Izin',
-            isShow: true
+            isShow: !user.TNO
         },{
             id: 3,
             icon: 'wallet-plus-outline',
@@ -39,14 +42,15 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightTeal,
             route: '',
             description: 'Payslip',
-            isShow: true
+            isShow: !user.TNO
         },{
             id: 4,
             icon: 'clipboard-search-outline',
             color: COLORS.Red,
             backgroundColor: COLORS.lightRed,
-            route: 'hadirkoe',
+            route: '',
             description: 'Surveys',
+            badge: badgeList != null ? badgeList.JUMLAH_SURVEY : 0,
             isShow: true
         },{
             id: 5,
@@ -55,6 +59,7 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightIndigo,
             route: '',
             description: 'Helpdesk',
+            badge: badgeList != null ? badgeList.JUMLAH_MASALAH_HELPDESK : 0,
             isShow: true
         },{
             id: 6,
@@ -63,6 +68,7 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightRed,
             route: '',
             description: 'HR Contact',
+            badge: badgeList != null ? badgeList.JUMLAH_MASALAH_HRCONTACT : 0,
             isShow: true
         },{
             id: 7,
@@ -79,6 +85,7 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightPurple,
             route: '',
             description: 'Approval PR/PO',
+            badge: badgeListPrPo != null ? badgeListPrPo.JUMLAH_PRPO : 0,
             isShow: true
         },{
             id: 9,
@@ -87,9 +94,9 @@ const ListMenu = (props) => {
             backgroundColor: COLORS.lightRed,
             route: '',
             description: 'SPPD',
-            isShow: true
+            isShow: dataValidasi != null ? dataValidasi.HADIRKOE : true
         }
-    ])
+    ]
 
     const  MenuItem = ({item}) => {
         if (item.isShow){
@@ -115,13 +122,22 @@ const ListMenu = (props) => {
                     {
                         item.icon != 'hadirkoe'
                         ?
-                        <Icon 
-                        name={item.icon} 
-                        size={32} 
-                        color={item.color}
-                        style={{
-                            opacity: 1,
-                            position:'absolute',top: 9}}/>
+                            <>
+                                <Icon 
+                                name={item.icon} 
+                                size={32} 
+                                color={item.color}
+                                style={{
+                                    opacity: 1,
+                                    position:'absolute',top: 9}}/>
+                                {
+                                    item.badge && item.badge != 0
+                                    ?
+                                        <Badge style={{position:'absolute', right:'15%'}}> {item.badge} </Badge>
+                                    :
+                                        <></>
+                                }
+                            </>
                         :
                         <Image source={require('../../assets/flat-icon/hadirkoe.png')} style={{ height: 32, width: 32,position:'absolute',top: 9 }} />
                     }

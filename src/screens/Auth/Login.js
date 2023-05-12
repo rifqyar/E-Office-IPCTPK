@@ -1,27 +1,32 @@
 import React, { useEffect } from 'react'
-import { View, Image, ImageBackground, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, StatusBar, Animated } from 'react-native';
+import { View, Image, ImageBackground, StyleSheet, KeyboardAvoidingView, Platform, StatusBar, Animated } from 'react-native';
 import { Text, Caption } from 'react-native-paper';
 import FormLogin from '../../components/Auth/FormLogin';
-import { SIZES } from '../../constants/theme';
+import { COLORS, SIZES } from '../../constants/theme';
 import { useSelector } from 'react-redux';
 import LoadingScreen from '../../components/LoadingScreen';
 import { LoginAnimation } from '../../constants/Animation/LoginAnimation';
+import StatusBarIOS from '../../constants/StatusBarIOS';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Login = ({ navigation }) => {
   const loading = useSelector((store) => store.loading.loading)
   const {...Animation} = LoginAnimation()
 
   useEffect(() => {
-    StatusBar.setTranslucent(false)
-    StatusBar.setBackgroundColor('#fff'); 
-    StatusBar.setBarStyle('dark-content')
+    if(Platform.OS == 'android'){
+      StatusBar.setTranslucent(false)
+      StatusBar.setBackgroundColor('#fff'); 
+      StatusBar.setBarStyle('dark-content')
+    }
 
     return () => {
     }
   })
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaProvider style={{flex: 1}}>
+      {Platform.OS == 'ios' ? <StatusBarIOS backgroundColor={COLORS.white} /> : <></>}
       <ImageBackground source={require('../../assets/imgs/login-bg.png')} style={{ height: '100%' }}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{flex: 1}}>
           <View style={{flex:1, justifyContent: 'center' }}>
@@ -57,7 +62,7 @@ const Login = ({ navigation }) => {
         :
           <View />
       }
-    </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 export default Login

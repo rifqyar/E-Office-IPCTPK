@@ -8,6 +8,7 @@
 import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  LogBox,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -47,6 +48,7 @@ function App(): JSX.Element {
     // init().finally(async () => {
       RNBootSplash.hide({ fade: true, duration: 150 });
     // });
+    LogBox.ignoreAllLogs();
   }, []);
   return (
     <PaperProvider>

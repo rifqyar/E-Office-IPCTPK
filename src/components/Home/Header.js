@@ -12,13 +12,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { COLORS, SIZES } from '../../constants/theme';
 import { MainRouteName } from '../../constants/mainRouteName';
-import { Avatar, Caption, Card, IconButton, Surface } from 'react-native-paper';
+import { Avatar, Badge, Caption, Card, IconButton, Surface } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Header = (props) => {
-    const { navigation } = props
-    const [listMenu, setListMenu] = useState([
+    const { navigation, badgeList, dataValidasi } = props
+    const user = useSelector(state => state.userReducer.user.user); //test
+
+    const listMenu = [
         {
             id: 1,
             icon: 'mail',
@@ -26,6 +28,7 @@ const Header = (props) => {
             backgroundColor: COLORS.lightOrange,
             route: MainRouteName.INBOX,
             description: 'Surat Masuk',
+            badge: badgeList != null ? badgeList.JUMLAH_SURAT_ALL_BADGES : 0,
             isShow: true
         },{
             id: 2,
@@ -34,18 +37,26 @@ const Header = (props) => {
             backgroundColor: COLORS.lightYellow,
             route: MainRouteName.OUTBOX,
             description: 'Surat Keluar',
+            badge: badgeList != null ? 0 : 0,
             isShow: true
         },{
-            id: 1,
+            id: 3,
             icon: 'hadirkoe',
             color: COLORS.Orange,
             backgroundColor: COLORS.lightRed,
             route: 'hadirkoe',
             description: 'Hadirkoe',
-            isShow: true
+            isShow: dataValidasi != null ? user.TNO == false && dataValidasi.HADIRKOE == true ? true : false : true,
+        },{
+            id: 4,
+            icon: 'airplanemode-active',
+            color: COLORS.Red,
+            backgroundColor: COLORS.lightRed,
+            route: '',
+            description: 'SPPD',
+            isShow: user.TNO == true && dataValidasi.HADIRKOE == false ? true : false
         }
-    ])
-    const user = useSelector(state => state.userReducer.user.user); //test
+    ]
 
     const MenuItem = ({item}) => {
         if (item.isShow){
@@ -71,15 +82,25 @@ const Header = (props) => {
                     {
                         item.icon != 'hadirkoe'
                         ?
-                        <Icon 
-                        name={item.icon} 
-                        size={32} 
-                        color={item.color}
-                        style={{
-                            opacity: 1,
-                            position:'absolute',top: 9}}/>
+                        <>
+
+                            <Icon 
+                            name={item.icon} 
+                            size={32} 
+                            color={item.color}
+                            style={{
+                                opacity: 1,
+                                position:'absolute',top: 9}}/>
+                            {
+                            item.badge && item.badge != 0
+                                ?
+                                    <Badge style={{position:'absolute', right:'25%'}}> {item.badge} </Badge>
+                                :
+                                    <></>
+                            }
+                        </>
                         :
-                        <Image source={require('../../assets/flat-icon/hadirkoe.png')} style={{ height: 32, width: 32,position:'absolute',top: 9 }} />
+                            <Image source={require('../../assets/flat-icon/hadirkoe.png')} style={{ height: 32, width: 32,position:'absolute',top: 9 }} />
                     }
                     
                     <Text style={{textAlign:'center', flexWrap:'wrap', }}>
@@ -94,7 +115,7 @@ const Header = (props) => {
         <>
             <LinearGradient colors={[COLORS.Blue, COLORS.accentBlue]} style={{paddingHorizontal: '2.5%', height: '26%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <View style={{ flexDirection: 'row', marginVertical: 10, marginLeft: '2.5%' }}>
+                    <View style={{ flexDirection: 'row', justifyContent:'space-between', marginVertical: 10, marginLeft: '2.5%' }}>
                         <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
                         <Text style={{ color: COLORS.white, marginTop: 7.5, marginLeft: 7.5, fontSize: 20 }}>E-Office</Text>
                     </View>
@@ -130,7 +151,7 @@ const Header = (props) => {
                 </View>
 
             </LinearGradient>
-            <Surface style={{backgroundColor: COLORS.white, marginTop: -50,marginBottom: 10, borderRadius: 25, marginHorizontal: '5%'}}>
+            <Surface style={{backgroundColor: COLORS.white, marginTop: '-10%',marginBottom: 10, borderRadius: 25, marginHorizontal: '5%'}}>
                 <FlatList 
                     data={listMenu}
                     numColumns={3}
