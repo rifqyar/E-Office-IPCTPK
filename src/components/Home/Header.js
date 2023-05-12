@@ -114,20 +114,10 @@ const Header = (props) => {
     return (
         <>
             <LinearGradient colors={[COLORS.Blue, COLORS.accentBlue]} style={{paddingHorizontal: '2.5%', height: '26%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <View style={{ flexDirection: 'row', justifyContent:'space-between', marginVertical: 10, marginLeft: '2.5%' }}>
-                        <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
-                        <Text style={{ color: COLORS.white, marginTop: 7.5, marginLeft: 7.5, fontSize: 20 }}>E-Office</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row-reverse', marginTop: 17.5, marginRight: '2.5%' }}>
-                        <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.LOGIN)}>
-                            <Icon
-                                name="logout"
-                                color={COLORS.white}
-                                size={24}
-                                style={{ marginRight: '5%' }}
-                            />
-                        </TouchableOpacity>
+                <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center', paddingVertical: SIZES.padding}}>
+                    <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
+                    {/* <Text style={{ color: COLORS.white, marginTop: 7.5, fontSize: 20 }}>E-Office</Text> */}
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '3%'}}>
                         <TouchableOpacity>
                             <Icon
                                 name="settings"
@@ -136,6 +126,14 @@ const Header = (props) => {
                                 style={{ marginRight: '5%' }}
                             />
                         </TouchableOpacity>
+                        {/* <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.LOGIN)}>
+                            <Icon
+                                name="logout"
+                                color={COLORS.white}
+                                size={24}
+                                style={{ marginRight: '5%' }}
+                            />
+                        </TouchableOpacity> */}
                     </View>
                 </View>
 
@@ -151,7 +149,7 @@ const Header = (props) => {
                 </View>
 
             </LinearGradient>
-            <Surface style={{backgroundColor: COLORS.white, marginTop: '-10%',marginBottom: 10, borderRadius: 25, marginHorizontal: '5%'}}>
+            <Surface style={{backgroundColor: COLORS.white, marginTop: '-15%',marginBottom: 10, borderRadius: 25, marginHorizontal: '5%'}}>
                 <FlatList 
                     data={listMenu}
                     numColumns={3}
