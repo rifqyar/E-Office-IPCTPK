@@ -29,7 +29,7 @@ const ListMenu = (props) => {
             isShow: !user.TNO
         },{
             id: 2,
-            icon: 'calendar-check-outline',
+            icon: 'calendar-cursor',
             color: COLORS.Green,
             backgroundColor: COLORS.lightGreen,
             route: MainRouteName.CUTI,
@@ -151,7 +151,7 @@ const ListMenu = (props) => {
     }
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, marginTop: SIZES.padding * 2}}>
             <FlatList 
                 data={listMenu}
                 numColumns={4}
