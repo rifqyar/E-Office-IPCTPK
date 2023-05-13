@@ -10,7 +10,7 @@ import {
   Header, 
   ListMenu
 } from '../../components/Home/Index'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   api_base_url,
@@ -23,6 +23,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import StatusBarIOS from '../../constants/StatusBarIOS';
 import { MainRouteName } from '../../constants/mainRouteName';
 import apiCall from '../../helpers/apiCall';
+import { SET_USER } from '../../constants/actionTypes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = ({navigation}) => {
   const [errorAPI, setErrorAPI] = useState(false);
@@ -34,6 +36,7 @@ const Home = ({navigation}) => {
   const [agendaList, setAgendaList] = useState(null)
   const [dataValidasi, setDataValidasi] = useState(null)
   const [refresh, setRefresh] = useState(false)
+  const dispatch = useDispatch()
   
   useEffect(() => {
     if (Platform.OS == 'android') {
@@ -128,7 +131,21 @@ const Home = ({navigation}) => {
       if (res.rcmsg == 'SUCCESS'){
         setDataValidasi(res.data)
       }
-      console.log(res)
+    })
+  }
+
+  const renewUserData = async () => {
+    await soapCall(`${api_base_url}`, 'eoffice_get_user_data', {
+      usernameEDI: api_user,
+      passwordEDI: api_pass,
+      username: user.NIPP
+    }).then((res) => {
+
+      dispatch({
+        type: SET_USER,
+        payload: {user: res.data},
+      });
+
     })
   }
 
@@ -138,6 +155,7 @@ const Home = ({navigation}) => {
     await getBadgesPrpro()
     await getDataAgenda()
     await getDataValidasi()
+    await renewUserData()
     callback(true)
   }
 
@@ -151,7 +169,7 @@ const Home = ({navigation}) => {
       <FlatList 
         data={[1,2]}
         ListHeaderComponent={<ListMenu navigation={navigation} badgeList={badgeList} badgeListPrPo={badgePrPo} dataValidasi={dataValidasi} />}
-        ListFooterComponent={ <Footer navigation={navigation} agendaList={agendaList} /> }
+        ListFooterComponent={ <Footer navigation={navigation} agendaList={agendaList} badgeP2B={badgeP2B} /> }
         refreshControl={
           <RefreshControl refreshing={refresh} onRefresh={() => {
             setRefresh(true)

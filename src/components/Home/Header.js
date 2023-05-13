@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { 
     View, 
     Text, 
@@ -9,16 +9,19 @@ import {
     FlatList
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 import { MainRouteName } from '../../constants/mainRouteName';
-import { Avatar, Badge, Caption, Card, IconButton, Surface } from 'react-native-paper';
+import { Avatar, Badge, Caption, Card, IconButton, Surface, Title } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import RBSheet from "react-native-raw-bottom-sheet";
 
 const Header = (props) => {
     const { navigation, badgeList, dataValidasi } = props
     const user = useSelector(state => state.userReducer.user.user); //test
+    const refRBSheet = useRef();
 
     const listMenu = [
         {
@@ -58,6 +61,42 @@ const Header = (props) => {
         }
     ]
 
+    const listMenuHadirkoe = [
+        {
+            id: 1,
+            icon: 'calendar-check-outline',
+            color: COLORS.lightGreen,
+            backgroundColor: COLORS.Green,
+            route: '',
+            description: 'Check In',
+            isShow: true
+        },{
+            id: 2,
+            icon: 'calendar-check-outline',
+            color: COLORS.lightRed,
+            backgroundColor: COLORS.Red,
+            route: '',
+            description: 'Check Out',
+            isShow: true
+        },{
+            id: 3,
+            icon: 'clipboard-text-clock-outline',
+            color: COLORS.lightCyan,
+            backgroundColor: COLORS.Cyan,
+            route: '',
+            description: 'Activity',
+            isShow: true
+        },{
+            id: 4,
+            icon: 'account-group',
+            color: COLORS.lightPurple,
+            backgroundColor: COLORS.Purple,
+            route: '',
+            description: 'Team',
+            isShow: true
+        }
+    ]
+
     const MenuItem = ({item}) => {
         if (item.isShow){
             return (
@@ -70,6 +109,8 @@ const Header = (props) => {
                     onPress={() => {
                         if(item.route != 'hadirkoe'){
                             navigation.push(item.route)
+                        } else {
+                            refRBSheet.current.open()
                         }
                     }}
                 >
@@ -102,6 +143,43 @@ const Header = (props) => {
                         :
                             <Image source={require('../../assets/flat-icon/hadirkoe.png')} style={{ height: 32, width: 32,position:'absolute',top: 9 }} />
                     }
+                    
+                    <Text style={{textAlign:'center', flexWrap:'wrap', }}>
+                        {item.description}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+    }
+
+    const MenuItemHadirkoe = ({item}) => {
+        if (item.isShow){
+            return (
+                <TouchableOpacity
+                    style={{
+                        marginBottom: SIZES.padding*2,
+                        width: '33%',
+                        alignItems:'center',
+                    }}
+                    onPress={() => {
+                        if(item.route != ''){
+                            navigation.push(item.route)
+                        }
+                    }}
+                >
+                    <View
+                        style={[
+                            styles.buttonMenu,
+                            {backgroundColor: item.backgroundColor}
+                        ]}>
+                    </View>
+                    <MaterialCommunityIcons 
+                        name={item.icon} 
+                        size={32} 
+                        color={item.color}
+                        style={{
+                            opacity: 1,
+                            position:'absolute',top: 9}}/>
                     
                     <Text style={{textAlign:'center', flexWrap:'wrap', }}>
                         {item.description}
@@ -159,6 +237,40 @@ const Header = (props) => {
                     style={{marginTop:SIZES.padding}}
                 />
             </Surface>
+
+
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={200}
+                customStyles={{
+                    wrapper: {
+                        backgroundColor: 'rgba(0,0,0,0.5)'
+                    },
+                    container:{
+                        borderTopLeftRadius: 30,
+                        borderTopRightRadius: 30,
+                    },
+                    draggableIcon: {
+                        backgroundColor: "#000"
+                    },
+                }}
+            >
+                <View style={{flex: 1, margin: SIZES.padding * 2}}>
+                    <Text style={{...FONTS.h5, fontWeight: '700'}} >Hadirkoe</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: SIZES.padding4}}>
+                        <FlatList 
+                            data={listMenuHadirkoe}
+                            numColumns={4}
+                            columnWrapperStyle={{ justifyContent:'space-around' }}
+                            keyExtractor={item => `${item.id}`}
+                            renderItem={item => MenuItemHadirkoe(item)}
+                            style={{marginTop:SIZES.padding}}
+                        />
+                    </View>
+                </View>
+            </RBSheet>
         </>
     )
 }

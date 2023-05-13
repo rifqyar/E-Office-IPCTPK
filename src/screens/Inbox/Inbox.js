@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { loading } from '../../redux/actions/loadingAction';
 import { COLORS, SIZES } from '../../constants/theme';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -10,6 +9,8 @@ import {
 } from '../../../app.json'
 import soapCall from '../../helpers/soapCall';
 import ButtonListInbox from '../../components/Inbox/ButtonListInbox';
+import LoadingScreen from '../../components/LoadingScreen';
+import { notLoading } from '../../redux/actions/loadingAction';
 
 const Inbox = ({ navigation }) => {
   const user = useSelector(state => state.userReducer.user);
@@ -18,13 +19,14 @@ const Inbox = ({ navigation }) => {
   const flatListRef = React.useRef();
   const [inboxes, setInboxes] = useState([]);
   const [atLastPage, setAtLastPage] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getInbox();
   }, []);
 
   const getInbox = async () => {
-    dispatch(loading());
+    setLoading(true)
     soapCall(api_base_url, 'eoffice_inbox', {
       usernameEDI: api_user,
       passwordEDI: api_pass,
@@ -40,6 +42,7 @@ const Inbox = ({ navigation }) => {
     }).then((res) => {
       // console.log(res)
       setInboxes(res.data.List_Inbox);
+      setLoading(false)
     })
   }
 
@@ -62,7 +65,7 @@ const Inbox = ({ navigation }) => {
         sorting: "1",
         filter: "0"
       }
-      dispatch(loading());
+      setLoading(true)
       soapCall(api_base_url, 'eoffice_inbox', params).then((res) => {
         const newList = inboxes.concat(res.data.List_Inbox);
         const newData = res.data.List_Inbox;
@@ -71,6 +74,7 @@ const Inbox = ({ navigation }) => {
           setAtLastPage(false);
         }
         setInboxes(newList);
+        setLoading(false)
       })
     }
   }
@@ -95,6 +99,13 @@ const Inbox = ({ navigation }) => {
         onEndReached={() => handlePagination()}
         onEndReachedThreshold={0.2}
       />
+
+      {
+        loading ? 
+          <LoadingScreen />
+        :
+          <View />
+      }
     </View>
   )
 }

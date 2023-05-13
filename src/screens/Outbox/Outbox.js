@@ -16,6 +16,7 @@ import {
 } from '../../../app.json'
 import soapCall from '../../helpers/soapCall';
 import ButtonListOutbox from '../../components/Outbox/ButtonListOutbox';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const Outbox = ({ navigation }) => {
   const user = useSelector(state => state.userReducer.user);
@@ -24,13 +25,14 @@ const Outbox = ({ navigation }) => {
   const flatListRef = React.useRef();
   const [outboxes, setOutboxes] = useState([]);
   const [atLastPage, setAtLastPage] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getOutbox();
   }, []);
 
   const getOutbox = async () => {
-    dispatch(loading());
+    setLoading(true)
     soapCall(api_base_url, 'eoffice_outbox', {
       usernameEDI: api_user,
       passwordEDI: api_pass,
@@ -42,8 +44,8 @@ const Outbox = ({ navigation }) => {
       tanggalawal: "",
       tanggalakhir: "",
     }).then((res) => {
-      console.log(res.data["List Outbox"]);
       setOutboxes(res.data["List Outbox"]);
+      setLoading(false)
     })
   }
 
@@ -66,7 +68,7 @@ const Outbox = ({ navigation }) => {
         sorting: "1",
         filter: "0"
       }
-      dispatch(loading());
+      setLoading(true)
       soapCall(api_base_url, 'eoffice_outbox', params).then((res) => {
         const newList = outboxes.concat(res.data["List Outbox"]);
         const newData = res.data["List Outbox"];
@@ -74,6 +76,7 @@ const Outbox = ({ navigation }) => {
         if (newData.length < 20){
           setAtLastPage(false);
         }
+        setLoading(false)
         setOutboxes(newList);
       })
     }
@@ -99,6 +102,12 @@ const Outbox = ({ navigation }) => {
         onEndReached={() => handlePagination()}
         onEndReachedThreshold={0.2}
       />
+      {
+        loading ? 
+          <LoadingScreen />
+        :
+          <View />
+      }
     </View>
   )
 }
