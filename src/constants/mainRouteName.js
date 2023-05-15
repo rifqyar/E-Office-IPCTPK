@@ -4,7 +4,8 @@ export const MainRouteName = {
     INBOX: 'Inbox',
     INBOX_DETAIL: 'InboxDetail',
     OUTBOX: 'Outbox',
-
+    MAP: 'Map',
+    
     //Absent
     ABSENT: 'Absent',
     ABSENT_DETAIL: 'AbsentDetail',

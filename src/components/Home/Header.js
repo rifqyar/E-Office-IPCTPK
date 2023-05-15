@@ -76,7 +76,7 @@ const Header = (props) => {
         icon: 'calendar-check-outline',
         color: COLORS.lightGreen,
         backgroundColor: COLORS.Green,
-        route: '',
+        route: MainRouteName.MAP,
         description: 'Check In',
         isShow: shiftData != null ? shiftData.CHECK_IN : false
     },{
@@ -84,7 +84,7 @@ const Header = (props) => {
         icon: 'calendar-check-outline',
         color: COLORS.lightRed,
         backgroundColor: COLORS.Red,
-        route: '',
+        route: MainRouteName.MAP,
         description: 'Check Out',
         isShow: shiftData != null ? shiftData.CHECK_OUT : false
     },{
@@ -192,6 +192,7 @@ const Header = (props) => {
                 onPress={() => {
                     if(item.route != ''){
                         navigation.push(item.route)
+                        refRBSheet.current.close()
                     }
                 }}
             >

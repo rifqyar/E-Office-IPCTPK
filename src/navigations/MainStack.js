@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import { ArrowLeft2, SearchNormal1 } from 'iconsax-react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { MainRouteName } from '../constants/mainRouteName';
 import { COLORS } from '../constants/theme';
 
@@ -17,33 +18,30 @@ import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import CutiList from '../screens/Cuti/CutiList';
 import SppdList from '../screens/Sppd/SppdList';
 import InboxDetail from '../screens/Inbox/InboxDetail';
+import Map from '../screens/Map/Map';
 import { Alert, BackHandler, TouchableOpacity, Image } from 'react-native';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
     return (
-        <ArrowLeft2
-            size="24"
-            color={COLORS.white}
-            onPress={() => {
-                navigation.goBack();
-            }}
-            style={{ marginRight: 10 }}
-        />
+        <Icon name={'chevron-left'} size={36} color={COLORS.white} onPress={() => {
+            navigation.goBack();
+        }} />
     );
 };
 
 const SearchButton = () => {
     const navigation = useNavigation();
     return (
-        <SearchNormal1
-            size="24"
-            color={COLORS.white}
-            // onPress={() => {
-            //     navigation.goBack();
-            // }}
-            style={{ marginRight: 10 }}
-        />
+        <MaterialIcons name={'search'} size={28} color={COLORS.white} />
+        // <SearchNormal1
+        //     size="24"
+        //     color={COLORS.white}
+        //     // onPress={() => {
+        //     //     navigation.goBack();
+        //     // }}
+        //     style={{ marginRight: 10 }}
+        // />
     );
 };
 
@@ -72,6 +70,12 @@ const DownloadButton = () => {
         </TouchableOpacity>
     );
 };
+
+const SetAddress = () => {
+    return (
+        <MaterialIcons name={'location-pin'} size={28} color={COLORS.white} />
+    )
+}
 
 const MainStack = ({ isLoggedIn, navigation }) => {
     const navigationRef = useRef();
@@ -188,6 +192,28 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerRight: () => (
                             <>
                                 <SearchButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.MAP}
+                    component={Map}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Lokasi Anda",
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                        headerRight: () => (
+                            <>
+                                <SetAddress />
                             </>
                         )
                     }}
