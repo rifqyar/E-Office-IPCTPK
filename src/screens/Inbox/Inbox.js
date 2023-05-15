@@ -71,7 +71,7 @@ const Inbox = ({ navigation }) => {
         const newData = res.data.List_Inbox;
         // console.log(newData.length)
         if (newData.length < 20){
-          setAtLastPage(false);
+          setAtLastPage(true);
         }
         setInboxes(newList);
         setLoading(false)

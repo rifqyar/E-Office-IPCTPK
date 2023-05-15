@@ -74,7 +74,7 @@ const Outbox = ({ navigation }) => {
         const newData = res.data["List Outbox"];
         // console.log(newData.length)
         if (newData.length < 20){
-          setAtLastPage(false);
+          setAtLastPage(true);
         }
         setLoading(false)
         setOutboxes(newList);

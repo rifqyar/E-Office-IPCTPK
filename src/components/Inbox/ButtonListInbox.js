@@ -20,7 +20,7 @@ const ButtonListInbox = ({ data }) => {
   }
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.INBOX_DETAIL)} 
+    <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.INBOX_DETAIL, {mail: data})} 
     style={{marginVertical: 5, marginHorizontal: '0.5%', backgroundColor: bgColor}}>
       <View style={{ flexDirection: 'row', borderLeftColor: COLORS.lightPurple, borderLeftWidth: 3, height: 120 }}>
         <View style={{ marginLeft: '5%', width: '10%', justifyContent: 'center' }}>

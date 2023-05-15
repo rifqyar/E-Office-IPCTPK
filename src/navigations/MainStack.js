@@ -4,6 +4,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import { ArrowLeft2, SearchNormal1 } from 'iconsax-react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { MainRouteName } from '../constants/mainRouteName';
 import { COLORS } from '../constants/theme';
 
@@ -16,7 +17,7 @@ import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import CutiList from '../screens/Cuti/CutiList';
 import SppdList from '../screens/Sppd/SppdList';
 import InboxDetail from '../screens/Inbox/InboxDetail';
-import { Alert, BackHandler } from 'react-native';
+import { Alert, BackHandler, TouchableOpacity, Image } from 'react-native';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
@@ -43,6 +44,32 @@ const SearchButton = () => {
             // }}
             style={{ marginRight: 10 }}
         />
+    );
+};
+
+const LogSuratButton = () => {
+    const navigation = useNavigation();
+    return (
+        <TouchableOpacity onPress={() => { console.log("Log Surat") }}>
+            <Image
+                source={require('../assets/imgs/menu-icon/history.png')}
+                style={{ height: 28, width: 28, marginRight: '10%' }}
+            />
+        </TouchableOpacity>
+    );
+};
+
+const DownloadButton = () => {
+    const navigation = useNavigation();
+    return (
+        <TouchableOpacity onPress={() => { console.log("Download") }}>
+            <Icon 
+                name='download' 
+                size={28} 
+                color={COLORS.white}
+                style={{marginRight: '-5%'}}
+            />
+        </TouchableOpacity>
     );
 };
 
@@ -137,7 +164,8 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         ),
                         headerRight: () => (
                             <>
-                                <SearchButton />
+                                <LogSuratButton />
+                                <DownloadButton />
                             </>
                         ),
                     }}
