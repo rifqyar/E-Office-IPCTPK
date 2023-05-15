@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, TouchableOpacity, SafeAreaView, StatusBar, FlatList, RefreshControl, Platform } from 'react-native';
+import { View, Image, TouchableOpacity, SafeAreaView, StatusBar, FlatList, RefreshControl, Platform, useWindowDimensions } from 'react-native';
 import { Text, Caption, Snackbar, Card } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
-import { COLORS } from '../../constants/theme';
+import { COLORS, SIZES } from '../../constants/theme';
 import soapCall from '../../helpers/soapCall';
 
 import {
@@ -37,7 +37,10 @@ const Home = ({navigation}) => {
   const [dataValidasi, setDataValidasi] = useState(null)
   const [refresh, setRefresh] = useState(false)
   const dispatch = useDispatch()
-  
+
+  const {width, height} = useWindowDimensions()
+  const isLandscape = width > height ? true : false
+
   useEffect(() => {
     if (Platform.OS == 'android') {
       StatusBar.setTranslucent(false)
@@ -164,22 +167,28 @@ const Home = ({navigation}) => {
     <SafeAreaProvider style={{flex: 1, backgroundColor: COLORS.white}}>
       {Platform.OS == 'ios' ? <StatusBarIOS backgroundColor={COLORS.Blue} barStyle='light-content' /> : <></>}
 
-      <Header navigation={navigation} badgeList={badgeList} dataValidasi={dataValidasi} />
+      <View style={{flex: isLandscape ? 0.6 : 0.3}}>
+        <Header navigation={navigation} isLandscape={isLandscape} badgeList={badgeList} dataValidasi={dataValidasi} />
+      </View>
 
-      <FlatList 
-        data={[1,2]}
-        ListHeaderComponent={<ListMenu navigation={navigation} badgeList={badgeList} badgeListPrPo={badgePrPo} dataValidasi={dataValidasi} />}
-        ListFooterComponent={ <Footer navigation={navigation} agendaList={agendaList} badgeP2B={badgeP2B} /> }
-        refreshControl={
-          <RefreshControl refreshing={refresh} onRefresh={() => {
-            setRefresh(true)
-            getAllData((done) => {
-              if(done)
-              setRefresh(false)
-            })
-          }} />
-        }
-      />
+      <View style={{flex: isLandscape ? 0.4 : 0.7, backgroundColor: COLORS.white, marginTop: !isLandscape ? (Platform.OS == 'ios' ? -10 : SIZES.padding * 2.5) : (Platform.OS == 'ios' ? -20 : SIZES.padding2 * 5 )}}>
+        <FlatList 
+          data={[1,2]}
+          style={{flex: 1}}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<ListMenu navigation={navigation} badgeList={badgeList} badgeListPrPo={badgePrPo} dataValidasi={dataValidasi} />}
+          ListFooterComponent={ <Footer navigation={navigation} agendaList={agendaList} badgeP2B={badgeP2B} /> }
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={() => {
+              setRefresh(true)
+              getAllData((done) => {
+                if(done)
+                setRefresh(false)
+              })
+            }} />
+          }
+        />
+      </View>
 
       <Snackbar
         visible={errorAPI}

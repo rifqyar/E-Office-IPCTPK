@@ -3,7 +3,8 @@ const { width, height } = Dimensions.get("window");
 
 
 export const Normalize = (size) => {
-  const scale = width / 320
+  const isLandscape = width > height ? true : false;
+  const scale = !isLandscape ? width : height / 320
   const newSize = size * scale
 
   if (Platform.OS === 'ios') {
@@ -135,7 +136,7 @@ export const SIZES = {
 };
 
 export const FONTS = {
-  largeTitle: { fontFamily: "Roboto-regular", fontSize: SIZES.largeTitle, lineHeight: Normalize(55) },
+  largeTitle: { fontFamily: "Roboto-Regular", fontSize: SIZES.largeTitle, lineHeight: Normalize(55) },
   h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: Normalize(36) },
   h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: Normalize(30) },
   h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: Normalize(22) },

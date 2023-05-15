@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ImageBackground,
-    FlatList
+    FlatList,
+    Platform
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -17,11 +18,20 @@ import { Avatar, Badge, Caption, Card, IconButton, Surface, Title } from 'react-
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import RBSheet from "react-native-raw-bottom-sheet";
+import LoadingScreen from '../LoadingScreen';
+import soapCall from '../../helpers/soapCall';
+import {
+    api_base_url_hadirkoe,
+    api_user,
+    api_pass,
+  } from '../../../app.json'
 
 const Header = (props) => {
-    const { navigation, badgeList, dataValidasi } = props
+    const { navigation, badgeList, dataValidasi, isLandscape} = props
     const user = useSelector(state => state.userReducer.user.user); //test
     const refRBSheet = useRef();
+    const [loading, setLoading] = useState(false)
+    const [shiftData, setShiftData] = useState(null)
 
     const listMenu = [
         {
@@ -61,48 +71,64 @@ const Header = (props) => {
         }
     ]
 
-    const listMenuHadirkoe = [
-        {
-            id: 1,
-            icon: 'calendar-check-outline',
-            color: COLORS.lightGreen,
-            backgroundColor: COLORS.Green,
-            route: '',
-            description: 'Check In',
-            isShow: true
-        },{
-            id: 2,
-            icon: 'calendar-check-outline',
-            color: COLORS.lightRed,
-            backgroundColor: COLORS.Red,
-            route: '',
-            description: 'Check Out',
-            isShow: true
-        },{
-            id: 3,
-            icon: 'clipboard-text-clock-outline',
-            color: COLORS.lightCyan,
-            backgroundColor: COLORS.Cyan,
-            route: '',
-            description: 'Activity',
-            isShow: true
-        },{
-            id: 4,
-            icon: 'account-group',
-            color: COLORS.lightPurple,
-            backgroundColor: COLORS.Purple,
-            route: '',
-            description: 'Team',
-            isShow: true
-        }
-    ]
+    const listMenuHadirkoe = [{
+        id: 1,
+        icon: 'calendar-check-outline',
+        color: COLORS.lightGreen,
+        backgroundColor: COLORS.Green,
+        route: '',
+        description: 'Check In',
+        isShow: shiftData != null ? shiftData.CHECK_IN : false
+    },{
+        id: 2,
+        icon: 'calendar-check-outline',
+        color: COLORS.lightRed,
+        backgroundColor: COLORS.Red,
+        route: '',
+        description: 'Check Out',
+        isShow: shiftData != null ? shiftData.CHECK_OUT : false
+    },{
+        id: 3,
+        icon: 'clipboard-text-clock-outline',
+        color: COLORS.lightCyan,
+        backgroundColor: COLORS.Cyan,
+        route: '',
+        description: 'Activity',
+        isShow: true
+    },{
+        id: 4,
+        icon: 'account-group',
+        color: COLORS.lightPurple,
+        backgroundColor: COLORS.Purple,
+        route: '',
+        description: 'Team',
+        isShow: true
+    }]
+
+    const getValidasi = async () => {
+        setLoading(true)
+        await soapCall(api_base_url_hadirkoe, 'am3_check_shift', {
+            usernameEDI: api_user,
+            passwordEDI: api_pass,
+            person_id: '',
+            nipp: user.NIPP,
+            iduser: user.IDUSER
+        }).then((res) => {
+            if(res.rcmsg == "SUCCESS"){
+                setShiftData(res.data)
+            } else {
+              // setErrorAPI(true)
+            }
+            setLoading(false)
+        })
+    }
 
     const MenuItem = ({item}) => {
         if (item.isShow){
             return (
                 <TouchableOpacity
                     style={{
-                        marginBottom: SIZES.padding*2,
+                        marginBottom: SIZES.padding,
                         width: '33%',
                         alignItems:'center',
                     }}
@@ -111,6 +137,7 @@ const Header = (props) => {
                             navigation.push(item.route)
                         } else {
                             refRBSheet.current.open()
+                            getValidasi()
                         }
                     }}
                 >
@@ -153,49 +180,55 @@ const Header = (props) => {
     }
 
     const MenuItemHadirkoe = ({item}) => {
-        if (item.isShow){
-            return (
-                <TouchableOpacity
+        return (
+            <TouchableOpacity
+                disabled={!item.isShow}
+                style={{
+                    marginBottom: SIZES.padding*2,
+                    width: '33%',
+                    alignItems:'center',
+                    opacity: item.isShow ? 1 : 0.5
+                }}
+                onPress={() => {
+                    if(item.route != ''){
+                        navigation.push(item.route)
+                    }
+                }}
+            >
+                <View
+                    style={[
+                        styles.buttonMenu,
+                        {backgroundColor: item.backgroundColor}
+                    ]}>
+                </View>
+                <MaterialCommunityIcons 
+                    name={item.icon} 
+                    size={32} 
+                    color={item.color}
                     style={{
-                        marginBottom: SIZES.padding*2,
-                        width: '33%',
-                        alignItems:'center',
-                    }}
-                    onPress={() => {
-                        if(item.route != ''){
-                            navigation.push(item.route)
-                        }
-                    }}
-                >
-                    <View
-                        style={[
-                            styles.buttonMenu,
-                            {backgroundColor: item.backgroundColor}
-                        ]}>
-                    </View>
-                    <MaterialCommunityIcons 
-                        name={item.icon} 
-                        size={32} 
-                        color={item.color}
-                        style={{
-                            opacity: 1,
-                            position:'absolute',top: 9}}/>
-                    
-                    <Text style={{textAlign:'center', flexWrap:'wrap', }}>
-                        {item.description}
-                    </Text>
-                </TouchableOpacity>
-            )
-        }
+                        opacity: item.isShow ? 1 : 0.5,
+                        position:'absolute',top: 9}}/>
+                
+                <Text style={{textAlign:'center', flexWrap:'wrap', }}>
+                    {item.description}
+                </Text>
+            </TouchableOpacity>
+        )
     }
 
     return (
-        <>
-            <LinearGradient colors={[COLORS.Blue, COLORS.accentBlue]} style={{paddingHorizontal: '2.5%', height: '26%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
-                <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center', paddingVertical: SIZES.padding}}>
+        <View style={{flex: 1}}>
+            <LinearGradient 
+                colors={[COLORS.Blue, COLORS.accentBlue]} 
+                style={[styles.headerBanner, {
+                    paddingBottom: !isLandscape ? (Platform.OS == 'android' ? '20%' : '15%' )  : '7%'
+                }]}>
+                <View style={[styles.header, {
+                    paddingVertical: !isLandscape ? SIZES.padding : 0
+                }]}>
                     <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
-                    {/* <Text style={{ color: COLORS.white, marginTop: 7.5, fontSize: 20 }}>E-Office</Text> */}
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '3%'}}>
+
+                    <View style={{marginTop: '3%'}}>
                         <TouchableOpacity>
                             <Icon
                                 name="settings"
@@ -204,19 +237,11 @@ const Header = (props) => {
                                 style={{ marginRight: '5%' }}
                             />
                         </TouchableOpacity>
-                        {/* <TouchableOpacity onPress={() => navigation.navigate(MainRouteName.LOGIN)}>
-                            <Icon
-                                name="logout"
-                                color={COLORS.white}
-                                size={24}
-                                style={{ marginRight: '5%' }}
-                            />
-                        </TouchableOpacity> */}
                     </View>
                 </View>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: '2.5%'}}>
-                    <View style={{marginTop: '2.5%'}}>
+                <View style={styles.profileSection}>
+                    <View style={{marginTop: !isLandscape ? '2.5%' : 0}}>
                         <Avatar.Image source={{uri: user.FOTO}}/>
                     </View>
                     <View style={{ marginLeft: '2.5%' }}>
@@ -225,11 +250,15 @@ const Header = (props) => {
                         <Caption style={{color:COLORS.white}}>{user.NAMAJABATAN}</Caption>
                     </View>
                 </View>
-
             </LinearGradient>
-            <Surface style={{backgroundColor: COLORS.white, marginTop: '-15%',marginBottom: 10, borderRadius: 25, marginHorizontal: '5%'}}>
+
+            <Surface 
+                style={[styles.menu ,{
+                    bottom: isLandscape ? (Platform.OS == 'android' ? -50 : 20)  : (Platform.OS == 'android' ? -20 : 15) ,
+                }]}>
                 <FlatList 
                     data={listMenu}
+                    scrollEnabled={false}
                     numColumns={3}
                     columnWrapperStyle={{ justifyContent:'space-around' }}
                     keyExtractor={item => `${item.id}`}
@@ -238,12 +267,11 @@ const Header = (props) => {
                 />
             </Surface>
 
-
             <RBSheet
                 ref={refRBSheet}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={200}
+                height={Platform.OS == 'android' ? 200 : 230}
                 customStyles={{
                     wrapper: {
                         backgroundColor: 'rgba(0,0,0,0.5)'
@@ -257,29 +285,40 @@ const Header = (props) => {
                     },
                 }}
             >
-                <View style={{flex: 1, margin: SIZES.padding * 2}}>
-                    <Text style={{...FONTS.h5, fontWeight: '700'}} >Hadirkoe</Text>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: SIZES.padding4}}>
-                        <FlatList 
-                            data={listMenuHadirkoe}
-                            numColumns={4}
-                            columnWrapperStyle={{ justifyContent:'space-around' }}
-                            keyExtractor={item => `${item.id}`}
-                            renderItem={item => MenuItemHadirkoe(item)}
-                            style={{marginTop:SIZES.padding}}
-                        />
-                    </View>
+                <View style={{flex: 1}}>
+                    <Text style={{fontSize: 18, color: COLORS.darkGrey, fontWeight: '700', marginLeft: SIZES.padding * 2.5}} >Hadirkoe</Text>
+                    {
+                        loading == true 
+                        ? 
+                            <LoadingScreen isTransparent={true} />
+                        :
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: SIZES.padding4*2 }}>
+                                <FlatList 
+                                    data={listMenuHadirkoe}
+                                    scrollEnabled={false}
+                                    numColumns={4}
+                                    columnWrapperStyle={{ justifyContent:'space-around' }}
+                                    keyExtractor={item => `${item.id}`}
+                                    renderItem={item => MenuItemHadirkoe(item)}
+                                />
+                            </View>
+                    }
                 </View>
             </RBSheet>
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     header: {
-      flexDirection: 'row', 
-      justifyContent: 'space-between',
-      backgroundColor: '#006ba2',
+        flexDirection: 'row', 
+        justifyContent:'space-between', 
+        alignItems:'center', 
+    },
+    profileSection: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        marginLeft: '2.5%'
     },
     buttonMenu:{
         height: 50,
@@ -289,6 +328,18 @@ const styles = StyleSheet.create({
         opacity: 0.2,
         alignItems:'center',
         justifyContent:'center'
+    },
+    headerBanner: {
+        paddingHorizontal: '2.5%', 
+        borderBottomLeftRadius: 20, 
+        borderBottomRightRadius: 20,
+    },
+    menu: {
+        backgroundColor: COLORS.white, 
+        marginBottom: 10, 
+        borderRadius: 25, 
+        marginHorizontal: '5%',
+        position: 'absolute',
     }
 })
 

@@ -151,7 +151,7 @@ const ListMenu = (props) => {
     }
 
     return (
-        <View style={{flex: 1, marginTop: SIZES.padding * 2}}>
+        <View style={{flex: 1}}>
             <FlatList 
                 data={listMenu}
                 numColumns={4}

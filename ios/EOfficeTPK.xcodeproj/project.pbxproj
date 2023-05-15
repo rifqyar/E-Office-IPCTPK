@@ -21,6 +21,9 @@
 		7839D5B729D2B78E00C93B92 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D5A729D2B78E00C93B92 /* Ionicons.ttf */; };
 		7839D5B929D2B78E00C93B92 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D5A929D2B78E00C93B92 /* MaterialCommunityIcons.ttf */; };
 		7839D5BB29D2B78E00C93B92 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7839D5AB29D2B78E00C93B92 /* FontAwesome.ttf */; };
+		785E0BA72A11E1EF006BA56B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 785E0BA62A11E1EF006BA56B /* Roboto-Regular.ttf */; };
+		785E0BAB2A11E225006BA56B /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 785E0BAA2A11E225006BA56B /* Roboto-Black.ttf */; };
+		785E0BAD2A11E23F006BA56B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 785E0BAC2A11E23F006BA56B /* Roboto-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B2A53B1D5B16C5241A610686 /* libPods-EOfficeTPK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A0D1A55A27CFFC304148D5 /* libPods-EOfficeTPK.a */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,9 @@
 		7839D5A729D2B78E00C93B92 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		7839D5A929D2B78E00C93B92 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		7839D5AB29D2B78E00C93B92 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		785E0BA62A11E1EF006BA56B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		785E0BAA2A11E225006BA56B /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		785E0BAC2A11E23F006BA56B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EOfficeTPK/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A28676190113131205C7D10F /* Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK-EOfficeTPKTests/Pods-EOfficeTPK-EOfficeTPKTests.release.xcconfig"; sourceTree = "<group>"; };
 		A6A27EB7761D656B407E3AE9 /* Pods-EOfficeTPK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EOfficeTPK.debug.xcconfig"; path = "Target Support Files/Pods-EOfficeTPK/Pods-EOfficeTPK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +134,9 @@
 		7839D59B29D2B73300C93B92 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				785E0BAC2A11E23F006BA56B /* Roboto-Bold.ttf */,
+				785E0BAA2A11E225006BA56B /* Roboto-Black.ttf */,
+				785E0BA62A11E1EF006BA56B /* Roboto-Regular.ttf */,
 				7839D5AB29D2B78E00C93B92 /* FontAwesome.ttf */,
 				7839D5A629D2B78E00C93B92 /* FontAwesome5_Brands.ttf */,
 				7839D59C29D2B78E00C93B92 /* FontAwesome5_Regular.ttf */,
@@ -277,12 +286,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				782E1E2B29DD5C50006DF86E /* BootSplash.storyboard in Resources */,
+				785E0BAD2A11E23F006BA56B /* Roboto-Bold.ttf in Resources */,
+				785E0BA72A11E1EF006BA56B /* Roboto-Regular.ttf in Resources */,
 				7839D5AC29D2B78E00C93B92 /* FontAwesome5_Regular.ttf in Resources */,
 				7839D5BB29D2B78E00C93B92 /* FontAwesome.ttf in Resources */,
 				7839D5B629D2B78E00C93B92 /* FontAwesome5_Brands.ttf in Resources */,
 				7839D5B929D2B78E00C93B92 /* MaterialCommunityIcons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				7839D5B729D2B78E00C93B92 /* Ionicons.ttf in Resources */,
+				785E0BAB2A11E225006BA56B /* Roboto-Black.ttf in Resources */,
 				7839D5B529D2B78E00C93B92 /* FontAwesome5_Solid.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7839D5B029D2B78E00C93B92 /* MaterialIcons.ttf in Resources */,
@@ -545,7 +557,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eoffice.ipctpk;
+				PRODUCT_BUNDLE_IDENTIFIER = eoffice.ipctpk.app;
 				PRODUCT_NAME = EOfficeTPK;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -574,7 +586,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eoffice.ipctpk;
+				PRODUCT_BUNDLE_IDENTIFIER = eoffice.ipctpk.app;
 				PRODUCT_NAME = EOfficeTPK;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

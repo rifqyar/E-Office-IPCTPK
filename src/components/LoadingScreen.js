@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { 
     StyleSheet,
     Animated,
-    ActivityIndicator
+    ActivityIndicator,
+    Platform
 } from 'react-native'
 
 import { COLORS, SIZES } from '../constants/theme';
@@ -29,12 +30,13 @@ export default class LoadingScreen extends Component {
         return (
             <Animated.View style={[
                 styles.loading,{
-                    opacity: this.state.fadeAnim
+                    opacity: this.state.fadeAnim,
+                    backgroundColor: this.props.isTransparent ? COLORS.transparent : 'rgba(0,0,0,0.2)'
                 }
             ]}>
                 <ActivityIndicator 
-                    color={COLORS.secondary} 
-                    size={SIZES.width/8} /> 
+                    color={Platform.OS == 'ios' ? COLORS.Grey : COLORS.accentBlue} 
+                    size={Platform.OS == 'android' ? SIZES.width/8 : 'large'} /> 
             </Animated.View> 
         )
     }
@@ -49,6 +51,5 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.2)'
     }
 })
