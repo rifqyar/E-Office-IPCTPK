@@ -21,7 +21,7 @@ const CutiList = () => {
   const flatListRef = React.useRef();
   const [cutiList, setCutiList] = useState([]);
   const [atLastPage, setAtLastPage] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCutiData();
@@ -72,11 +72,7 @@ const CutiList = () => {
       soapCall(api_base_url, 'eoffice_cuti_list', params).then((res) => {
         const newCutiList = cutiList.concat(res.data["Cuti Personal"]);
         const newData = res.data["Cuti Personal"];
-        console.log(newData.length);
-        console.log(batasAtas);
-        console.log(batasBawah);
         if (newData.length < 10){
-          console.log("Stop");
           setAtLastPage(true);
         }
         setCutiList(newCutiList);

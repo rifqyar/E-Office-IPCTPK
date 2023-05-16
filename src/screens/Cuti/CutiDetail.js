@@ -10,25 +10,25 @@ import {
 } from '../../../app.json'
 import soapCall from '../../helpers/soapCall';
 
-const InboxDetail = ({navigation, route}) => {
+const CutiDetail = ({navigation, route}) => {
     const user = useSelector(state => state.userReducer.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getDetailInbox();
+        getDetailCuti();
         console.log(route.params.mail);
     }, []);
 
-    const getDetailInbox = async () => {
+    const getDetailCuti = async () => {
         dispatch(loading());
         soapCall(api_base_url, 'eoffice_viewmail', {
             usernameEDI: api_user,
             passwordEDI: api_pass,
             nipp: user.user.NIPP,
             linkSurat: route.params.mail.Location,
-            from_modul: 'inbox'
+            from_modul: 'cuti'
         }).then((res) => {
-            console.log(res.data.List_Inbox)
+            console.log(res)
             // setInboxes(res.data.List_Inbox);
         })
     }
@@ -42,7 +42,7 @@ const InboxDetail = ({navigation, route}) => {
     )
 }
 
-export default InboxDetail
+export default CutiDetail
 
 const styles = StyleSheet.create({
     container: {

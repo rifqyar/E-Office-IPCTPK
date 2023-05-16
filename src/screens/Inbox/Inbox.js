@@ -19,7 +19,7 @@ const Inbox = ({ navigation }) => {
   const flatListRef = React.useRef();
   const [inboxes, setInboxes] = useState([]);
   const [atLastPage, setAtLastPage] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getInbox();
@@ -40,7 +40,7 @@ const Inbox = ({ navigation }) => {
       sorting: "1",
       filter: "0"
     }).then((res) => {
-      // console.log(res)
+      console.log(res.data.List_Inbox)
       setInboxes(res.data.List_Inbox);
       setLoading(false)
     })

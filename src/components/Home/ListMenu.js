@@ -92,7 +92,7 @@ const ListMenu = (props) => {
             icon: 'airplane',
             color: COLORS.Red,
             backgroundColor: COLORS.lightRed,
-            route: '',
+            route: MainRouteName.SPPD,
             description: 'SPPD',
             isShow: dataValidasi != null ? dataValidasi.HADIRKOE : true
         }
