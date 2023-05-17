@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 
 export const Normalize = (size) => {
   const isLandscape = width > height ? true : false;
-  const scale = !isLandscape ? width : height / 320
+  const scale = !isLandscape ? width / 320 : height / 320
   const newSize = size * scale
 
   if (Platform.OS === 'ios') {

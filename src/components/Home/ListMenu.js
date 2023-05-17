@@ -128,7 +128,7 @@ const ListMenu = (props) => {
                                 size={32} 
                                 color={item.color}
                                 style={{
-                                    opacity: 1,
+                                    opacity: 0.6,
                                     position:'absolute',top: 9}}/>
                                 {
                                     item.badge && item.badge != 0

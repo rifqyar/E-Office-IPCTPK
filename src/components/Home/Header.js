@@ -157,7 +157,7 @@ const Header = (props) => {
                             size={32} 
                             color={item.color}
                             style={{
-                                opacity: 1,
+                                opacity: 0.6,
                                 position:'absolute',top: 9}}/>
                             {
                             item.badge && item.badge != 0
@@ -191,7 +191,7 @@ const Header = (props) => {
                 }}
                 onPress={() => {
                     if(item.route != ''){
-                        navigation.push(item.route)
+                        navigation.push(item.route, props)
                         refRBSheet.current.close()
                     }
                 }}
@@ -207,7 +207,7 @@ const Header = (props) => {
                     size={32} 
                     color={item.color}
                     style={{
-                        opacity: item.isShow ? 1 : 0.5,
+                        opacity: item.isShow ? 0.6 : 0.3,
                         position:'absolute',top: 9}}/>
                 
                 <Text style={{textAlign:'center', flexWrap:'wrap', }}>

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { 
+    Alert,
+    Linking,
+    Platform,
     StyleSheet, 
     Text, 
     View 
@@ -21,16 +24,21 @@ import {
 import { useSelector } from 'react-redux';
 import apiCall from '../../helpers/apiCall';
 
-const Map = () => {
-    const [loading, setLoading] = useState(true)
+import Geolocation from '@react-native-community/geolocation';
+
+const Map = (props) => {
+    console.log(props)
+    const [loading, setLoading] = useState(false)
     const user = useSelector(state => state.userReducer.user.user)
     const [addressData, setAddressData] = useState(null)
 
     useEffect(() => {
-      getAddress()    
-    }, [])
+      getAddress()  
+      getLocation()  
+    }, [user])
 
     const getAddress = async () => {
+        setLoading(true)
         await apiCall(`${api_res}am9_address.php`,{
             usernameEDI:api_user,
             passwordEDI:api_pass,
@@ -42,16 +50,51 @@ const Map = () => {
             action:'get_address',
             status:''
         }, (res) => {
+            setLoading(false)
             if (res.rcmsg == 'SUCCESS'){
                 setAddressData(res.data)
             }
         })
     }
+
+    const getLocation = () => {
+        // Geolocation.requestAuthorization(info => {
+        //     console.log(info)
+        // })
+        Geolocation.getCurrentPosition((info) => {
+            console.log(info)
+        }, (err) => {
+            console.log(err.PERMISSION_DENIED)
+
+            if (err.PERMISSION_DENIED == '1'){
+                Alert.alert(err.message, "Gagal mendapatkan Lokasi, nyalakan GPS/Location device anda atau ijinkan aplikasi IMOVE mengakses lokasi anda.", [
+                    {
+                        text: "Cancel",
+                        onPress: () => {
+                            Alert.alert('', 'Aplikasi tidak akan bisa melakukan Check In / Check Out jika tidak mengaktifkan GPS / Location Service',
+                            {text: 'OK', onPress: () => navigation})
+                        },
+                        style: "cancel"
+                    },
+                    { 
+                        text: "Buka Pengaturan", 
+                        onPress: () => {
+                            if (Platform.OS === 'ios') {
+                                Linking.openURL('app-settings:');
+                            } else {
+                                Linking.openSettings();
+                            }
+                        } 
+                    }
+                ]);
+            }
+        });
+    }
     
     return (
         <View style={{flex: 1, backgroundColor: COLORS.white}}>
             {
-                loading 
+                loading == true
                 ?
                     <View style={styles.contaner}>
                         <Lottie source={require('../../assets/icon/location.json')} autoPlay loop style={{

@@ -132,7 +132,7 @@ const FormLogin = (props) => {
                     <View style={{width: '70%'}}>
                         <Text>Swipe to right to confirm you are not robot</Text>
                     </View>
-                    <View style={{width: '30%'}}>
+                    <View>
                         <Switch value={isSwitchOn} onValueChange={() => setSwitch(!isSwitchOn)} />
                     </View>
                 </View>

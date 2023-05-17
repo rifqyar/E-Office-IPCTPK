@@ -1,4 +1,4 @@
-import { View, Text, Animated, Easing } from 'react-native'
+import { View, Text, Animated, Easing, useWindowDimensions } from 'react-native'
 import React, { useRef, useState } from 'react'
 // import { SIZES } from '../../assets/theme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -11,6 +11,9 @@ export const LoginAnimation = () => {
     const moveTitle = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
     const moveForm = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
     const contentTransition = useRef(new Animated.Value(0)).current;
+
+    const {width, height} = useWindowDimensions()
+    const isLandscape = width > height ? true : false
 
     setTimeout(() => {
         Animated.parallel([
@@ -41,7 +44,7 @@ export const LoginAnimation = () => {
                 moveTitle,{
                     toValue: {
                         x: 0,
-                        y: -SIZES.height / 5
+                        y: -100
                     }, useNativeDriver: false,
                     delay: 750
                 }
@@ -50,7 +53,7 @@ export const LoginAnimation = () => {
                 moveForm,{
                     toValue: {
                         x: 0,
-                        y: -SIZES.height / 5
+                        y: -100
                     }, useNativeDriver: false,
                 }
             ),
