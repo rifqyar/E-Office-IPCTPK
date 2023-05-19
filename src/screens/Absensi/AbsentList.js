@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Card } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { COLORS } from '../../constants/theme';
 import { MainRouteName } from '../../constants/mainRouteName';
 import AbsentListButton from '../../components/Absensi/AbsentListButton';
@@ -62,16 +62,6 @@ const AbsentList = ({ navigation }) => {
       tempDataYears.push({ label: currentYear-i, value: currentYear-i});
     }
     setDataYears(tempDataYears);
-  }
-
-  const openDropdownMonth = () => {
-    setOpenMonths(true);
-    setOpenYears(false);
-  }
-
-  const openDropdownYear = () => {
-    setOpenMonths(false);
-    setOpenYears(true);
   }
 
   const getAbsen = async() => {
@@ -164,9 +154,9 @@ const AbsentList = ({ navigation }) => {
             dropDownContainerStyle={styles.dropDownContainerStyle}
           />
           <TouchableOpacity onPress={getAbsen} style={styles.searchButton}>
-            <Ionicons
+            <Icon
               name="search"
-              color="rgba(255, 255, 255, .9)"
+              color={COLORS.white}
               size={20}
               style={{ marginRight: 2 }}
             />

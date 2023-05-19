@@ -13,6 +13,9 @@ export const MainRouteName = {
     //Cuti
     CUTI: 'Cuti',
 
+    //Pegawai
+    CARI_PEGAWAI: 'CariPegawai',
+
     //SPPD
     SPPD: 'Sppd'
   };

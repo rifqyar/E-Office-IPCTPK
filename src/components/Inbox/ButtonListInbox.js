@@ -31,13 +31,13 @@ const ButtonListInbox = ({ data }) => {
           />
         </View>
         <View style={{ width: '59%', marginLeft: '2.5%', justifyContent: 'space-evenly' }}>
-          <Text style={{ color: 'grey' }}>{data.No_Surat}</Text>
+          <Text style={{ color: COLORS.Grey }}>{data.No_Surat}</Text>
           <Text style={{ fontWeight: 'bold' }}>{data.Dari}</Text>
           <Text>{truncate(data.Perihal)}</Text>
-          <Text style={{ color: '#0394fc' }}>{data.Tanggal_Surat}</Text>
+          <Text style={{ color: COLORS.Blue }}>{data.Tanggal_Surat}</Text>
         </View>
         <TouchableOpacity onPress={() => console.log("Kembalikan")} style={{ maxWidth: '25%', alignItems: 'center', justifyContent: 'center', marginLeft: '2.5%', marginRight: '2.5%' }}>
-          <Text style={{ fontSize: 12, color: '#0394fc' }}>KEMBALIKAN</Text>
+          <Text style={{ fontSize: 12, color: COLORS.Blue }}>KEMBALIKAN</Text>
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

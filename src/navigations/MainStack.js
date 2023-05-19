@@ -17,6 +17,7 @@ import AbsentList from '../screens/Absensi/AbsentList';
 import AbsentDetail from '../screens/Absensi/AbsentDetail';
 import CutiList from '../screens/Cuti/CutiList';
 import SppdList from '../screens/Sppd/SppdList';
+import SearchPegawai from '../screens/Pegawai/SearchPegawai';
 import InboxDetail from '../screens/Inbox/InboxDetail';
 import Map from '../screens/Map/Map';
 import { Alert, BackHandler, TouchableOpacity, Image } from 'react-native';
@@ -270,6 +271,23 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                         headerRight: () => (
                             <>
                                 <SearchButton />
+                            </>
+                        )
+                    }}
+                />
+                <Stack.Screen
+                    name={MainRouteName.CARI_PEGAWAI}
+                    component={SearchPegawai}
+                    options={{
+                        headerShown: true,
+                        headerTitle: "Cari Pegawai",
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
                             </>
                         )
                     }}

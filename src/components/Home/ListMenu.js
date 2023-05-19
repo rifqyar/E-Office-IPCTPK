@@ -75,7 +75,7 @@ const ListMenu = (props) => {
             icon: 'account-search-outline',
             color: COLORS.Cyan,
             backgroundColor: COLORS.lightCyan,
-            route: '',
+            route: MainRouteName.CARI_PEGAWAI,
             description: 'Cari Pegawai',
             isShow: true
         },{
