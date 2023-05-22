@@ -15,6 +15,7 @@ import { COLORS, FONTS, SIZES } from '../../constants/theme'
 import { List } from 'react-content-loader/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { DarkTheme } from '@react-navigation/native'
 
 const Footer = (props) => {
     const {navigation, agendaList, badgeP2B} = props
@@ -91,7 +92,7 @@ const Footer = (props) => {
             {
                 agendaList != null
                 ?
-                    <View style={{ backgroundColor: COLORS.white, marginTop: 10, marginHorizontal: '3%' }}>
+                    <View style={{ backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: 10, marginHorizontal: '3%' }}>
                         <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>Agenda</Text>
                         <Caption style={{ marginLeft: '2.5%', color: 'grey', marginTop: 2 }}>Daftar agenda anda hari ini</Caption>
                         <LinearGradient 
@@ -128,7 +129,7 @@ const Footer = (props) => {
             }
 
             {/* P2B */}
-            <View style={{ backgroundColor: COLORS.white, marginTop: 10, marginBottom: 10, marginHorizontal: '3%'}}>
+            <View style={{ backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: 10, marginBottom: 10, marginHorizontal: '3%'}}>
                 <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>P2B</Text>
                 <Caption style={{ marginLeft: '2.5%', color: COLORS.Grey, marginTop: 2 }}>Penilaian Performa Bulanan</Caption>
                 <LinearGradient 

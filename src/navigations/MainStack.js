@@ -21,13 +21,16 @@ import SearchPegawai from '../screens/Pegawai/SearchPegawai';
 import InboxDetail from '../screens/Inbox/InboxDetail';
 import Map from '../screens/Map/Map';
 import { Alert, BackHandler, TouchableOpacity, Image } from 'react-native';
+import Setting from '../screens/Setting/Setting';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
     return (
-        <Icon name={'chevron-left'} size={36} color={COLORS.white} onPress={() => {
+        <TouchableOpacity onPress={() => {
             navigation.goBack();
-        }} />
+        }} >
+            <Icon name={'chevron-left'} size={36} color={COLORS.white} />
+        </TouchableOpacity>
     );
 };
 
@@ -312,6 +315,23 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                                 <SearchButton />
                             </>
                         )
+                    }}
+                />
+                <Stack.Screen 
+                    name={MainRouteName.SETTING}
+                    component={Setting}
+                    options={{
+                        headerShown: true,
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerShadowVisible:false,
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
                     }}
                 />
             </Stack.Navigator>

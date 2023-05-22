@@ -25,6 +25,7 @@ import {
     api_user,
     api_pass,
   } from '../../../app.json'
+import { DarkTheme } from '@react-navigation/native';
 
 const Header = (props) => {
     const { navigation, badgeList, dataValidasi, isLandscape} = props
@@ -191,7 +192,10 @@ const Header = (props) => {
                 }}
                 onPress={() => {
                     if(item.route != ''){
-                        navigation.push(item.route, props)
+                        navigation.push(item.route, {
+                            ...props,
+                            shiftData : shiftData
+                        })
                         refRBSheet.current.close()
                     }
                 }}
@@ -230,7 +234,7 @@ const Header = (props) => {
                     <Image source={require('../../assets/imgs/ipc-tpk-logo-new.png')} style={{ height: 27, width: 89, marginTop: 10, marginLeft: '2.5%' }} />
 
                     <View style={{marginTop: '3%'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.push(MainRouteName.SETTING)}>
                             <Icon
                                 name="settings"
                                 color={COLORS.white}
@@ -280,6 +284,7 @@ const Header = (props) => {
                     container:{
                         borderTopLeftRadius: 30,
                         borderTopRightRadius: 30,
+                        backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.blackLighten
                     },
                     draggableIcon: {
                         backgroundColor: "#000"
@@ -287,7 +292,7 @@ const Header = (props) => {
                 }}
             >
                 <View style={{flex: 1}}>
-                    <Text style={{fontSize: 18, color: COLORS.darkGrey, fontWeight: '700', marginLeft: SIZES.padding * 2.5}} >Hadirkoe</Text>
+                    <Text style={{fontSize: 18, color: DarkTheme.dark != true ? COLORS.darkGrey : COLORS.lightGrey, fontWeight: '700', marginLeft: SIZES.padding * 2.5}} >Hadirkoe</Text>
                     {
                         loading == true 
                         ? 
@@ -336,7 +341,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
     },
     menu: {
-        backgroundColor: COLORS.white, 
+        backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.blackLighten2,
         marginBottom: 10, 
         borderRadius: 25, 
         marginHorizontal: '5%',

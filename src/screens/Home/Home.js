@@ -25,6 +25,7 @@ import { MainRouteName } from '../../constants/mainRouteName';
 import apiCall from '../../helpers/apiCall';
 import { SET_USER } from '../../constants/actionTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DarkTheme } from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [errorAPI, setErrorAPI] = useState(false);
@@ -164,14 +165,14 @@ const Home = ({navigation}) => {
 
   if (typeof(user) != 'undefined')
   return (
-    <SafeAreaProvider style={{flex: 1, backgroundColor: COLORS.white}}>
+    <SafeAreaProvider style={{flex: 1, backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black}}>
       {Platform.OS == 'ios' ? <StatusBarIOS backgroundColor={COLORS.Blue} barStyle='light-content' /> : <></>}
 
       <View style={{flex: isLandscape ? 0.6 : 0.3}}>
         <Header navigation={navigation} isLandscape={isLandscape} badgeList={badgeList} dataValidasi={dataValidasi} />
       </View>
 
-      <View style={{flex: isLandscape ? 0.4 : 0.7, backgroundColor: COLORS.white, marginTop: !isLandscape ? (Platform.OS == 'ios' ? -10 : SIZES.padding * 2.5) : (Platform.OS == 'ios' ? -20 : SIZES.padding2 * 5 )}}>
+      <View style={{flex: isLandscape ? 0.4 : 0.7, backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: !isLandscape ? (Platform.OS == 'ios' ? -10 : SIZES.padding * 2.5) : (Platform.OS == 'ios' ? -20 : SIZES.padding2 * 5 )}}>
         <FlatList 
           data={[1,2]}
           style={{flex: 1}}

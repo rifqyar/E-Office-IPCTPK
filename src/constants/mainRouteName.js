@@ -5,6 +5,7 @@ export const MainRouteName = {
     INBOX_DETAIL: 'InboxDetail',
     OUTBOX: 'Outbox',
     MAP: 'Map',
+    SETTING: 'Setting',
     
     //Absent
     ABSENT: 'Absent',
