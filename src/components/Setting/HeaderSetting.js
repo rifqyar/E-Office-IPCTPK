@@ -1,23 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, FONTS, SIZES } from '../../constants/theme'
 import { Avatar, Caption, Headline, Title } from 'react-native-paper'
-import { useSelector } from 'react-redux'
-import MaskedView from '@react-native-masked-view/masked-view';
+import { useDispatch, useSelector } from 'react-redux'
+import { showModal } from '../../redux/actions/modalAction'
 
 const HeaderSetting = (props) => {
-    const user = useSelector(state => state.userReducer.user.user)
+    const user = useSelector(state => state.userReducer.user?.user)
     const {isLandscape} = props
+    const dispatch = useDispatch()
+
     return (
         <View style={{flex: 1}}>
             <LinearGradient 
                 colors={[COLORS.Blue, COLORS.accentBlue]}
                 style={[styles.headerContainer, {paddingVertical: isLandscape ? SIZES.padding * 3 : 0}]}
             >   
-                <View style={styles.avatarBorder}>
+                <TouchableOpacity style={styles.avatarBorder} onPress={() => {
+                    dispatch(showModal())
+                }}>
                     <Avatar.Image source={{uri: user.FOTO }} size={100} />
-                </View>
+                </TouchableOpacity>
                 <Caption style={{...FONTS.h6, color: COLORS.white, marginTop: SIZES.padding * 3}}>
                     {user.NAMA}
                 </Caption>

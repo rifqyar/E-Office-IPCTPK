@@ -8,7 +8,7 @@ export const LoginAnimation = () => {
     const edges = useSafeAreaInsets()
     const opacityLogo = useRef(new Animated.Value(0)).current;
     const scaleText= useRef(new Animated.Value(1)).current;
-    const moveTitle = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
+    const moveTitle = useRef(new Animated.ValueXY({x: 0, y: 50})).current;
     const moveForm = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
     const contentTransition = useRef(new Animated.Value(0)).current;
 
@@ -44,7 +44,7 @@ export const LoginAnimation = () => {
                 moveTitle,{
                     toValue: {
                         x: 0,
-                        y: -100
+                        y: -50
                     }, useNativeDriver: false,
                     delay: 750
                 }
@@ -53,7 +53,7 @@ export const LoginAnimation = () => {
                 moveForm,{
                     toValue: {
                         x: 0,
-                        y: -100
+                        y: -50
                     }, useNativeDriver: false,
                 }
             ),

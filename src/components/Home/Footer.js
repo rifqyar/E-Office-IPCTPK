@@ -4,7 +4,8 @@ import {
     Text, 
     TouchableOpacity,
     Image,
-    FlatList
+    FlatList,
+    Appearance
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { 
@@ -19,6 +20,7 @@ import { DarkTheme } from '@react-navigation/native'
 
 const Footer = (props) => {
     const {navigation, agendaList, badgeP2B} = props
+    const colorSheme = Appearance.getColorScheme()
 
     // DUMMY
     const dummyAgenda = [
@@ -92,8 +94,8 @@ const Footer = (props) => {
             {
                 agendaList != null
                 ?
-                    <View style={{ backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: 10, marginHorizontal: '3%' }}>
-                        <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>Agenda</Text>
+                    <View style={{ backgroundColor: colorSheme == 'light' ? COLORS.white : COLORS.black, marginTop: 10, marginHorizontal: '3%' }}>
+                        <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5, color: colorSheme == 'light' ? COLORS.black : COLORS.white }}>Agenda</Text>
                         <Caption style={{ marginLeft: '2.5%', color: 'grey', marginTop: 2 }}>Daftar agenda anda hari ini</Caption>
                         <LinearGradient 
                             start={{x: 0, y: 0}} end={{x: 1, y: 0}}  
@@ -116,7 +118,7 @@ const Footer = (props) => {
                     </View>
                 :
                     <View style={{ backgroundColor: COLORS.white, marginTop: 10, marginHorizontal: '3%' }}>
-                        <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>Agenda</Text>
+                        <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5, color: colorSheme == 'light' ? COLORS.black : COLORS.white }}>Agenda</Text>
                         <Caption style={{ marginLeft: '2.5%', color: 'grey', marginTop: 2 }}>Daftar agenda anda hari ini</Caption>
                         <LinearGradient 
                             start={{x: 0, y: 0}} end={{x: 1, y: 0}}  
@@ -129,8 +131,8 @@ const Footer = (props) => {
             }
 
             {/* P2B */}
-            <View style={{ backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: 10, marginBottom: 10, marginHorizontal: '3%'}}>
-                <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>P2B</Text>
+            <View style={{ backgroundColor: colorSheme == 'light' ? COLORS.white : COLORS.black, marginTop: 10, marginBottom: 10, marginHorizontal: '3%'}}>
+                <Text style={{ marginLeft: '2.5%', fontSize: 16, fontWeight: 'bold', marginTop: 5, color: colorSheme == 'light' ? COLORS.black : COLORS.white}}>P2B</Text>
                 <Caption style={{ marginLeft: '2.5%', color: COLORS.Grey, marginTop: 2 }}>Penilaian Performa Bulanan</Caption>
                 <LinearGradient 
                     start={{x: 0, y: 0}} end={{x: 1, y: 0}}  

@@ -3,27 +3,24 @@ import { View, Image, ImageBackground, StyleSheet, KeyboardAvoidingView, Platfor
 import { Text, Caption, Title } from 'react-native-paper';
 import FormLogin from '../../components/Auth/FormLogin';
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoadingScreen from '../../components/LoadingScreen';
 import { LoginAnimation } from '../../constants/Animation/LoginAnimation';
 import StatusBarIOS from '../../constants/StatusBarIOS';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const Login = ({ navigation }) => {
+const Login = (props) => {
   const loading = useSelector((store) => store.loading.loading)
-  console.log(loading)
   const {...Animation} = LoginAnimation()
-
-  const {width, height} = useWindowDimensions()
-  const isLandscape = width > height ? true : false
-
+  const {navigation, route} = props
+  
   useEffect(() => {
     if(Platform.OS == 'android'){
       StatusBar.setTranslucent(false)
       StatusBar.setBackgroundColor('#fff'); 
       StatusBar.setBarStyle('dark-content')
     }
-
+    
     return () => {
     }
   })
@@ -36,9 +33,7 @@ const Login = ({ navigation }) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} style={{
-          marginBottom: SIZES.padding * 3
-        }}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
           <Animated.View style={{
             height: SIZES.width/2,
             opacity: Animation.opacityLogo,

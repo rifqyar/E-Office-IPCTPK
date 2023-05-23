@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, TouchableOpacity, SafeAreaView, StatusBar, FlatList, RefreshControl, Platform, useWindowDimensions } from 'react-native';
+import { View, Image, TouchableOpacity, SafeAreaView, StatusBar, FlatList, RefreshControl, Platform, useWindowDimensions, Appearance } from 'react-native';
 import { Text, Caption, Snackbar, Card } from 'react-native-paper';
-import LinearGradient from 'react-native-linear-gradient';
 import { COLORS, SIZES } from '../../constants/theme';
 import soapCall from '../../helpers/soapCall';
 
@@ -21,16 +20,19 @@ import {
 } from '../../../app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import StatusBarIOS from '../../constants/StatusBarIOS';
-import { MainRouteName } from '../../constants/mainRouteName';
 import apiCall from '../../helpers/apiCall';
 import { SET_USER } from '../../constants/actionTypes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DarkTheme } from '@react-navigation/native';
+import { MainRouteName } from '../../constants/mainRouteName';
 
 const Home = ({navigation}) => {
   const [errorAPI, setErrorAPI] = useState(false);
   const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn); //test
-  const user = useSelector(state => state.userReducer.user.user)
+  const user = useSelector(state => state.userReducer.user?.user)
+
+  if (typeof(user) == 'undefined'){
+    navigation.push(MainRouteName.LOGIN)
+  }
+
   const [badgeList, setBadgeList] = useState(null)
   const [badgeP2B, setBadgeP2B] = useState(null)
   const [badgePrPo, setBadgePrPo] = useState(null)
@@ -41,6 +43,7 @@ const Home = ({navigation}) => {
 
   const {width, height} = useWindowDimensions()
   const isLandscape = width > height ? true : false
+  const colorSheme = Appearance.getColorScheme();
 
   useEffect(() => {
     if (Platform.OS == 'android') {
@@ -165,14 +168,14 @@ const Home = ({navigation}) => {
 
   if (typeof(user) != 'undefined')
   return (
-    <SafeAreaProvider style={{flex: 1, backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black}}>
+    <SafeAreaProvider style={{flex: 1, backgroundColor: colorSheme == 'light' ? COLORS.white : COLORS.black}}>
       {Platform.OS == 'ios' ? <StatusBarIOS backgroundColor={COLORS.Blue} barStyle='light-content' /> : <></>}
 
       <View style={{flex: isLandscape ? 0.6 : 0.3}}>
         <Header navigation={navigation} isLandscape={isLandscape} badgeList={badgeList} dataValidasi={dataValidasi} />
       </View>
 
-      <View style={{flex: isLandscape ? 0.4 : 0.7, backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.black, marginTop: !isLandscape ? (Platform.OS == 'ios' ? -10 : SIZES.padding * 2.5) : (Platform.OS == 'ios' ? -20 : SIZES.padding2 * 5 )}}>
+      <View style={{flex: isLandscape ? 0.4 : 0.7, backgroundColor: colorSheme == 'light' ? COLORS.white : COLORS.black, marginTop: !isLandscape ? (Platform.OS == 'ios' ? -10 : SIZES.padding * 2.5) : (Platform.OS == 'ios' ? -20 : SIZES.padding2 * 5 )}}>
         <FlatList 
           data={[1,2]}
           style={{flex: 1}}

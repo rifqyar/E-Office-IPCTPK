@@ -25,7 +25,7 @@ import { Switch } from 'react-native-gesture-handler'
 import LoadingScreen from '../LoadingScreen'
 import { MainRouteName } from '../../constants/mainRouteName'
 import { useDispatch } from 'react-redux'
-import { loading } from '../../redux/actions/loadingAction'
+import { loading, notLoading } from '../../redux/actions/loadingAction'
 import soapCall from '../../helpers/soapCall'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { LOGIN_SUCCESS } from '../../constants/actionTypes'
@@ -75,6 +75,7 @@ const FormLogin = (props) => {
                 payload: {user: res.data},
             });
             // console.log("userSelector->", useSelector(state => state.userReducer.user));
+            dispatch(notLoading())
             props.navigation.push(MainRouteName.HOME)
         })
 

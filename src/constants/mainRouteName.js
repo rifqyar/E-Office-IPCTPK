@@ -6,6 +6,8 @@ export const MainRouteName = {
     OUTBOX: 'Outbox',
     MAP: 'Map',
     SETTING: 'Setting',
+    CHANGEPASSWORD: 'Change Password',
+    EDITPROFILE: 'Edit Profile',
     
     //Absent
     ABSENT: 'Absent',

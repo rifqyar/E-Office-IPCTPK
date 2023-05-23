@@ -7,7 +7,8 @@ import {
     Image,
     ImageBackground,
     FlatList,
-    Platform
+    Platform,
+    Appearance
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -25,7 +26,6 @@ import {
     api_user,
     api_pass,
   } from '../../../app.json'
-import { DarkTheme } from '@react-navigation/native';
 
 const Header = (props) => {
     const { navigation, badgeList, dataValidasi, isLandscape} = props
@@ -33,6 +33,7 @@ const Header = (props) => {
     const refRBSheet = useRef();
     const [loading, setLoading] = useState(false)
     const [shiftData, setShiftData] = useState(null)
+    const colorSheme = Appearance.getColorScheme()
 
     const listMenu = [
         {
@@ -172,7 +173,7 @@ const Header = (props) => {
                             <Image source={require('../../assets/flat-icon/hadirkoe.png')} style={{ height: 32, width: 32,position:'absolute',top: 9 }} />
                     }
                     
-                    <Text style={{textAlign:'center', flexWrap:'wrap', }}>
+                    <Text style={{textAlign:'center', flexWrap:'wrap', color: colorSheme == 'light' ? COLORS.black : COLORS.white }}>
                         {item.description}
                     </Text>
                 </TouchableOpacity>
@@ -284,7 +285,7 @@ const Header = (props) => {
                     container:{
                         borderTopLeftRadius: 30,
                         borderTopRightRadius: 30,
-                        backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.blackLighten
+                        backgroundColor: colorSheme == 'light' ? COLORS.white : COLORS.blackLighten
                     },
                     draggableIcon: {
                         backgroundColor: "#000"
@@ -292,7 +293,7 @@ const Header = (props) => {
                 }}
             >
                 <View style={{flex: 1}}>
-                    <Text style={{fontSize: 18, color: DarkTheme.dark != true ? COLORS.darkGrey : COLORS.lightGrey, fontWeight: '700', marginLeft: SIZES.padding * 2.5}} >Hadirkoe</Text>
+                    <Text style={{fontSize: 18, color: colorSheme == 'light' ? COLORS.darkGrey : COLORS.lightGrey, fontWeight: '700', marginLeft: SIZES.padding * 2.5}} >Hadirkoe</Text>
                     {
                         loading == true 
                         ? 
@@ -341,7 +342,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
     },
     menu: {
-        backgroundColor: DarkTheme.dark != true ? COLORS.white : COLORS.blackLighten2,
+        backgroundColor: Appearance.getColorScheme() == 'light' ? COLORS.white : COLORS.blackLighten2,
         marginBottom: 10, 
         borderRadius: 25, 
         marginHorizontal: '5%',

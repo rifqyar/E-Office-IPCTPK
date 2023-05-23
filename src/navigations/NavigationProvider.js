@@ -9,8 +9,8 @@ import { loading } from '../redux/actions/loadingAction';
 
 const NavigationProvider = () => {
     const dispatch = useDispatch()
-    // const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
-    const [isLoggedIn, setIsLoggedIn] = useState(null)
+    const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
+    // const [isLoggedIn, setIsLoggedIn] = useState(null)
 
     useEffect(() => {
         getUser();
@@ -21,14 +21,14 @@ const NavigationProvider = () => {
             var user = await AsyncStorage.getItem('user');
             user = JSON.parse(user)
             if (user != null) {
-                setIsLoggedIn(true)
+                // setIsLoggedIn(true)
                 dispatch({
                     type: SET_USER,
                     payload: {user: user, isLoggedIn: true},
                 });
             } else {
                 let authState = { isLoggedIn: false, user: null };
-                setIsLoggedIn(false)
+                // setIsLoggedIn(false)
                 dispatch(setUser(authState));
             }
         } catch (error) { }

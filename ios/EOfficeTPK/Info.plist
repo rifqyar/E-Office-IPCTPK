@@ -24,6 +24,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MBXAccessToken</key>
+	<string>pk.eyJ1IjoiY3VraWsiLCJhIjoiY2tmcnAxNHRtMGEyZjJzcGR2ZnFia3J2MyJ9.K9i26lkWh9gSCMA103d8AQ</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -53,13 +55,6 @@
 	<string>This app requires constant access to your location in order to track your position, even when the screen is off or the app is in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Use to get longitude and latitude for attendance location</string>
-	
-	<key>UILaunchStoryboardName</key>
-	<string>BootSplash.storyboard</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MaterialIcons.ttf</string>
@@ -72,6 +67,12 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>BootSplash.storyboard</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

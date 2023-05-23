@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 
 import { COLORS, SIZES } from '../constants/theme';
+import { Text } from 'react-native-paper';
 
 export default class LoadingScreen extends Component {
     state = {
@@ -18,7 +19,7 @@ export default class LoadingScreen extends Component {
         Animated.timing(this.state.fadeAnim, {
             toValue: 2,
             duration: 500,
-            useNativeDriver: true
+            useNativeDriver: false,
         }).start();
 
         this.setState({
@@ -37,6 +38,8 @@ export default class LoadingScreen extends Component {
                 <ActivityIndicator 
                     color={Platform.OS == 'ios' ? COLORS.Grey : COLORS.accentBlue} 
                     size={Platform.OS == 'android' ? SIZES.width/8 : 'large'} /> 
+                
+                {this.props.child}
             </Animated.View> 
         )
     }

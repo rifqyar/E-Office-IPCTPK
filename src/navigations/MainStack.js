@@ -22,6 +22,9 @@ import InboxDetail from '../screens/Inbox/InboxDetail';
 import Map from '../screens/Map/Map';
 import { Alert, BackHandler, TouchableOpacity, Image } from 'react-native';
 import Setting from '../screens/Setting/Setting';
+import EditProfile from '../screens/Setting/EditProfile';
+import ChangePassword from '../screens/Setting/ChangePassword';
+import { useSelector } from 'react-redux';
 
 const ArrowBackButton = () => {
     const navigation = useNavigation();
@@ -84,7 +87,6 @@ const SetAddress = () => {
 const MainStack = ({ isLoggedIn, navigation }) => {
     const navigationRef = useRef();
     const routeNameRef = useRef();
-
     const backAction = () => {
         if (routeNameRef.current == 'Home' || routeNameRef.current == 'Login'){
             Alert.alert("Hold on!", "Are you sure you want to exit app?", [
@@ -119,7 +121,7 @@ const MainStack = ({ isLoggedIn, navigation }) => {
         >
             <Stack.Navigator
                 initialRouteName={
-                    isLoggedIn ? MainRouteName.HOME : MainRouteName.LOGIN
+                    isLoggedIn == true ? MainRouteName.HOME : MainRouteName.LOGIN
                     // MainRouteName.HOME
                 }>
                 <Stack.Screen
@@ -320,6 +322,42 @@ const MainStack = ({ isLoggedIn, navigation }) => {
                 <Stack.Screen 
                     name={MainRouteName.SETTING}
                     component={Setting}
+                    options={{
+                        headerShown: true,
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerShadowVisible:false,
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                    }}
+                />
+
+                <Stack.Screen 
+                    name={MainRouteName.EDITPROFILE}
+                    component={EditProfile}
+                    options={{
+                        headerShown: true,
+                        headerStyle: {
+                            backgroundColor: COLORS.Blue,
+                        },
+                        headerShadowVisible:false,
+                        headerTintColor: COLORS.white,
+                        headerLeft: () => (
+                            <>
+                                <ArrowBackButton />
+                            </>
+                        ),
+                    }}
+                />
+
+                <Stack.Screen 
+                    name={MainRouteName.CHANGEPASSWORD}
+                    component={ChangePassword}
                     options={{
                         headerShown: true,
                         headerStyle: {
